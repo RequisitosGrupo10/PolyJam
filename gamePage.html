@@ -5,38 +5,128 @@
     <title class="title">Game Title</title>
     <!-- <link rel="stylesheet" href="css/style.css"> -->
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 
-<body>
-    <header class="title">Game Title</header>
-    <nav>
-        <h3>Navigation</h3>
-        <a href="index.html">Home</a>
-        <a href="login.html">Log in</a>
-        <a href="register.html">Sign in</a>
-    </nav>
-    <section id="game">
-        <h2 class="title">Game Title</h2>
-        <div>THIS IS GAME WINDOW</div>
-    </section>
-    <article id="generalDescription">
-        <h2>Description</h2>
-        <section class="title">
-            <h2>Game Title</h2>
+<body class="bg-light mx-auto w-75">
+    <div class="container-fluid bg-light" id="wrapper">
+        <!--Nav-->
+        <div class="card">
+            <nav class="navbar navbar-expand-md navbar-light">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#contentToCollapse" aria-expanded="false" aria-controls="contentToCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="contentToCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="login.html">My CV</a></li>
+                        <li class="nav-item"><a class="nav-link" href="register.html">Weekly Timetable</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="gamePage.html">Game title<span
+                                    class="visually-hidden">CURRENT</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
+        <!--game Windows-->
+        <div class="card text-center ">
+            <header class="card-header" id="gameTitle">Game Title</header>
+            <div class="card-body">
+                <section id="game">
+                    <div>THIS IS GAME WINDOW</div>
+                </section>
+            </div>
+            <div class="card-footer text-muted">
+                updated 2 days ago
+            </div>
+        </div>
+
+
+        <!--Game Description-->
+        <article id="generalDescription">
+            <h2>Description</h2>
+            <section class="title">
+                <h2>Game Title</h2>
+            </section>
+            <section id="description" class="title">
+                <h3>Description</h3>
+                <p>Game Description</p>
+            </section>
+        </article>
+
+        <!--Game Instructions-->
+        <aside id="instructions">
+            <h2>How to play?</h2>
+            <p>Game Instructions</p>
+        </aside>
+
+        <!--Comments-->
+        <section style="background-color: #e7effd;">
+            <h3 class="h3 text-center">Comments</h3>
+            <div class="container my-1 py-1 text-dark">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-11 col-lg-9 col-xl-7">
+                        <div class="d-flex flex-start mb-4">
+                            <div class="card w-100">
+                                <div class="card-body p-4">
+                                    <div class="">
+                                        <h5>Johny Cash</h5>
+                                        <p class="small">3 hours ago</p>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat.
+                                        </p>
+
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-start">                          
+                            <div class="card w-100">
+                                <div class="card-body p-4">
+                                    <div class="">
+                                        <h5>Mindy Campbell</h5>
+                                        <p class="small">5 hours ago</p>
+                                        <p>
+                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                                            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                                            sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-end">
+                <button type="button" class="btn btn-primary my-2 me-3" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Add Comment</button>
+                </div>
+            </div>
         </section>
-        <section id="description" class="title">
-            <h3>Description</h3>
-            <p>Game Description</p>
-        </section>
-    </article>
-    <aside id="instructions">
-        <h2>How to play?</h2>
-        <p>Game Instructions</p>
-    </aside>
-    <footer id="footer">
-        <a href="#game">Go up</a>
-        <p>2023 PolyJam</p>
-    </footer>
+
+        <footer id="footer">
+            <a href="#game">Go up</a>
+            <p>2023 PolyJam</p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
