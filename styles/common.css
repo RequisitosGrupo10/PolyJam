@@ -1,5 +1,6 @@
 :root {
     --primary: rgb(47, 42, 42);
+    --secondary: rgb(206, 83, 0) ;
     --dark: black;
 }
 
@@ -32,7 +33,7 @@ nav {
 nav ul {
     display: flex;
     flex-direction: row;
-    gap: 2rem;
+    gap: 1rem;
     list-style-type: none;  
 
 }
