@@ -1,5 +1,6 @@
 :root {
-    --secondary: orange;
+    --primary: rgb(47, 42, 42);
+    --dark: black;
 }
 
 * {
@@ -37,7 +38,7 @@ nav ul {
 }
 
 footer {
-    background-color: black;
+    background-color: var(--dark);
     color: #FFF;
     position: relative;
     margin-top: auto;
