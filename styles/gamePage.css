@@ -6,3 +6,12 @@
     overflow-y:scroll;
     max-height: 90%;
 }
+
+.help_text{
+    padding: 0.5rem 1rem;
+    text-align: justify;
+}
+
+.subtitle{
+    padding: 0.5rem 0.5rem;
+}
