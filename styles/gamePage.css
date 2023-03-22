@@ -1,11 +1,6 @@
 @import url(common.css);
 
-#commentSection{
-    position: fixed;
-    right: 12.5%;
-    overflow-y:scroll;
-    max-height: 90%;
-}
+
 
 .help_text{
     padding: 0.5rem 1rem;
