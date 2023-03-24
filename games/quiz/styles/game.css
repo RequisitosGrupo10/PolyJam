@@ -80,3 +80,15 @@
     transform: rotate(360deg);
   }
 }
+
+#next {
+  position: fixed;
+  bottom: 5px;
+  right: 20px;
+}
+
+#feedback {
+  position: fixed;
+  bottom: 20px;
+  margin: 0 auto;
+}

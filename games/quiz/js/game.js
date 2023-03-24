@@ -5,6 +5,10 @@ const scoreText = document.getElementById('score');
 const progressBarFull = document.getElementById('progressBarFull');
 const loader = document.getElementById('loader');
 const game = document.getElementById('game');
+
+const nextBtn = document.getElementById('next')
+const feedback = document.getElementById('feedback');
+
 let currentQuestion = {};
 let acceptingAnswers = false;
 let score = 0;
@@ -66,6 +70,9 @@ getNewQuestion = () => {
         return window.location.assign('end.html');
     }
     questionCounter++;
+    if (questionCounter >= MAX_QUESTIONS) {
+        nextBtn.innerHTML = "End";
+    }
     progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
     //Update the progress bar
     progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
@@ -100,10 +107,15 @@ choices.forEach((choice) => {
 
         selectedChoice.parentElement.classList.add(classToApply);
 
-        setTimeout(() => {
+        if (classToApply === 'incorrect') {
+            feedback.innerHTML = "The correct answer was: " + currentQuestion['choice' + currentQuestion.answer];
+        }
+
+        nextBtn.addEventListener('click', () => {
             selectedChoice.parentElement.classList.remove(classToApply);
+            feedback.innerHTML = "";
             getNewQuestion();
-        }, 1000);
+        });
     });
 });
 
