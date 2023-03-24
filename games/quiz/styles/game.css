@@ -83,12 +83,12 @@
 
 #next {
   position: fixed;
-  bottom: 5px;
+  bottom: 20px;
   right: 20px;
 }
 
 #feedback {
   position: fixed;
-  bottom: 20px;
+  bottom: 40px;
   margin: 0 auto;
 }
