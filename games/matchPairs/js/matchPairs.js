@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       {
         name: 'pineapple',
-        img: 'js/images/pineapple.jpg'
+        img: 'js/images/pineapple.png'
       },
       {
         name: 'greenApple',
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       {
         name: 'pineapple',
-        img: 'js/images/pineapple.jpg'
+        img: 'js/images/pineapple.png'
       },
       {
         name: 'greenApple',
