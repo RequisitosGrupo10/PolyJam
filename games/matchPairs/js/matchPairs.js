@@ -3,19 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardArray = [
       {
         name: 'banana',
-        img: 'js/images/banana.jpg'
+        img: 'js/images/banana.png'
       },
       {
         name: 'blueberries',
-        img: 'js/images/blueberries.jpg'
+        img: 'js/images/blueberries.png'
       },
       {
         name: 'cherries',
-        img: 'js/images/cherries.jpg'
+        img: 'js/images/cherries.png'
       },
       {
         name: 'kiwi',
-        img: 'js/images/kiwi.jpg'
+        img: 'js/images/kiwi.png'
       },
       {
         name: 'pineapple',
@@ -23,23 +23,23 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       {
         name: 'greenApple',
-        img: 'js/images/greenApple.jpg'
+        img: 'js/images/greenApple.png'
       },
       {
         name: 'banana',
-        img: 'js/images/banana.jpg'
+        img: 'js/images/banana.png'
       },
       {
         name: 'blueberries',
-        img: 'js/images/blueberries.jpg'
+        img: 'js/images/blueberries.png'
       },
       {
         name: 'cherries',
-        img: 'js/images/cherries.jpg'
+        img: 'js/images/cherries.png'
       },
       {
         name: 'kiwi',
-        img: 'js/images/kiwi.jpg'
+        img: 'js/images/kiwi.png'
       },
       {
         name: 'pineapple',
@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       {
         name: 'greenApple',
-        img: 'js/images/greenApple.jpg'
+        img: 'js/images/greenApple.png'
       }
     ]
   
     cardArray.sort(() => 0.5 - Math.random())
   
-    const grid = document.querySelector('.grid')
+    const grid = document.querySelector('#grid')
     const resultDisplay = document.querySelector('#result')
     let cardsChosen = []
     let cardsChosenId = []
@@ -63,7 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function createBoard() {
       for (let i = 0; i < cardArray.length; i++) {
         const card = document.createElement('img')
-        card.setAttribute('src', 'js/images/blank.jpg')
+        card.setAttribute('src', 'js/images/blank.png')
+        card.setAttribute('width', '300')
+        card.setAttribute('height', '300')
         card.setAttribute('data-id', i)
         card.addEventListener('click', flipCard)
         grid.appendChild(card)
@@ -77,20 +79,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const optionTwoId = cardsChosenId[1]
       
       if(optionOneId == optionTwoId) {
-        cards[optionOneId].setAttribute('src', 'js/images/blank.jpg')
-        cards[optionTwoId].setAttribute('src', 'js/images/blank.jpg')
+        cards[optionOneId].setAttribute('src', 'js/images/blank.png')
+        cards[optionTwoId].setAttribute('src', 'js/images/blank.png')
         alert('You have clicked the same image!')
       }
       else if (cardsChosen[0] === cardsChosen[1]) {
         alert('You found a match')
-        cards[optionOneId].setAttribute('src', 'js/images/white.jpg')
-        cards[optionTwoId].setAttribute('src', 'js/images/white.jpg')
+        cards[optionOneId].setAttribute('src', 'js/images/white.png')
+        cards[optionTwoId].setAttribute('src', 'js/images/white.png')
         cards[optionOneId].removeEventListener('click', flipCard)
         cards[optionTwoId].removeEventListener('click', flipCard)
         cardsWon.push(cardsChosen)
       } else {
-        cards[optionOneId].setAttribute('src', 'js/images/blank.jpg')
-        cards[optionTwoId].setAttribute('src', 'js/images/blank.jpg')
+        cards[optionOneId].setAttribute('src', 'js/images/blank.png')
+        cards[optionTwoId].setAttribute('src', 'js/images/blank.png')
         alert('Sorry, try again')
       }
       cardsChosen = []
