@@ -21,7 +21,7 @@ body {
 }
 
 section {
-    margin: 2rem;
+    padding: 2rem;
 }
 
 nav {
@@ -44,6 +44,7 @@ footer {
     color: #FFF;
     position: relative;
     margin-top: auto;
+    padding-top: 1rem;
     width: 100%;
     bottom: 0;
 }

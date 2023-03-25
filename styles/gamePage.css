@@ -8,3 +8,9 @@
 .subtitle{
     padding: 0.5rem 0.5rem;
 }
+
+iframe{
+    width: 100%;
+    height: 30rem;
+    padding: 0;
+}
