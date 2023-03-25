@@ -3,7 +3,6 @@ class Navbar extends HTMLElement {
     // Always call super first in constructor
     super();
     this.current = window.location.pathname;
-    console.log(this.current);
   }
 
   connectedCallback() {

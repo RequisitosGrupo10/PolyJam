@@ -1,10 +1,10 @@
 class CommentSection extends HTMLElement {
-    constructor() {
-        // Always call super first in constructor
-        super();
-    }
-    connectedCallback() {
-        this.innerHTML = `
+  constructor() {
+    // Always call super first in constructor
+    super();
+  }
+  connectedCallback() {
+    this.innerHTML = `
         <section id="commentSection">
         <div class="card bg-info my-2">
           <h3 class="h3 text-center">Comments</h3>
@@ -57,9 +57,8 @@ class CommentSection extends HTMLElement {
       </section>
         `;
 
-
-        this.setAttribute('role', 'comment section');
-        this.setAttribute('aria-label', 'User comments');
-    }
+    this.setAttribute("role", "comment section");
+    this.setAttribute("aria-label", "User comments");
+  }
 }
 customElements.define("custom-comment-section", CommentSection);
