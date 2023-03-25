@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+    document.oncontextmenu = new Function("return false");
     const grid = document.getElementById('grid');
 
     const cardArray = [
@@ -50,6 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             name: 'blank',
             img: 'js/images/blank.png'
+        },
+        {
+            name: 'flag',
+            img: 'js/images/flag.png'
+        },
+        {
+            name: 'question',
+            img: 'js/images/question.png'
         }
     ]
 
@@ -68,7 +76,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 let img = document.createElement('img');
                 cell.appendChild(img);
                 changeImage(cell, 11);
-                cell.onclick = function () { clickCell(this); };
+                cell.onclick = function () { 
+                    if (this.firstChild.getAttribute('name') == 'flag' || this.firstChild.getAttribute('name') == 'question') return false;
+                    clickCell(this); };
+                cell.oncontextmenu = function () {
+                    if (this.firstChild.getAttribute('name') == 'blank') {
+                        changeImage(this, 12);
+                    } else if (this.firstChild.getAttribute('name') == 'flag') {
+                        changeImage(this, 13);
+                    } else if (this.firstChild.getAttribute('name') == 'question') {
+                        changeImage(this, 11);
+                    }else{
+                        return false;
+                    }
+                };
                 let mine = document.createAttribute("data-mine");
                 mine.value = "false";
                 cell.setAttributeNode(mine);
@@ -102,10 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < 10; i++) {
             for (let j = 0; j < 10; j++) {
                 let cell = grid.rows[i].cells[j];
-                if (cell.getAttribute("data-mine") == "true"){
+                if (cell.getAttribute("data-mine") == "true") {
                     cell.className = "mine";
                     changeImage(cell, 10);
-                } 
+                }
             }
         }
     }
