@@ -58,7 +58,7 @@ addCommentBtn.addEventListener("click", addComment, false);
 function submitButtonFuncion(e){
     let displayedName = document.getElementById("displayedName").value;
     let commentText = document.getElementById("commentText").value;
-    let time = "Just now";
+    let time = new Date().toLocaleDateString("es-ES", {day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit"});
 
     let commentDiv = document.createElement("div");
     commentDiv.setAttribute("class", "d-flex flex-start mb-4 commentDiv");
@@ -80,8 +80,8 @@ function submitButtonFuncion(e){
     article.appendChild(header);
 
     let timeP = document.createElement("p");
-    timeP.setAttribute("class", "small");
-    timeP.innerHTML = time;
+    timeP.setAttribute("class", "small updatedTimestamp");
+    timeP.innerHTML = time
     article.appendChild(timeP);
 
     let commentP = document.createElement("p");

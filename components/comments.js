@@ -16,7 +16,7 @@ class CommentSection extends HTMLElement {
                     <div class="card-body p-4">
                       <article class="">
                         <h5>Johny Cash</h5>
-                        <p class="small">3 hours ago</p>
+                        <p class="small updatedTimestamp">3 hours ago</p>
                         <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit, sed do eiusmod tempor incididunt ut labore et
@@ -33,7 +33,7 @@ class CommentSection extends HTMLElement {
                     <div class="card-body p-4">
                       <article class="">
                         <h5>Mindy Campbell</h5>
-                        <p class="small">5 hours ago</p>
+                        <p class="small updatedTimestamp">5 hours ago</p>
                         <p>
                           Duis aute irure dolor in reprehenderit in voluptate
                           velit esse cillum dolore eu fugiat nulla pariatur.
