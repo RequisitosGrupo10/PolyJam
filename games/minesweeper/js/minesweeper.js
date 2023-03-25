@@ -114,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let row = Math.floor(Math.random() * 10);
             let col = Math.floor(Math.random() * 10);
             let cell = grid.rows[row].cells[col];
+            if (cell.getAttribute('data-mine') == 'true') i--;
             cell.setAttribute("data-mine", "true");
         }
     }
