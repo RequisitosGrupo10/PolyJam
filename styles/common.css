@@ -39,7 +39,7 @@ nav ul {
 
 }
 
-footer {
+custom-footer {
     background-color: var(--dark);
     color: #FFF;
     position: relative;
