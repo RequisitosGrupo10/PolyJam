@@ -19,7 +19,7 @@
         <div class="card">
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">PolyJam</a>
+                    <a class="navbar-brand" href="../../index.html">PolyJam</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -30,18 +30,33 @@
                                 <a class="nav-link" aria-current="page" href="../../index.html">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="matchPairs.html">Match Pairs</a>
+                                <a class="nav-link" href="../matchPairs/matchPairs.html">Match Pairs</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="../quiz/quiz.html">Quick Quiz</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">Minigame 3</a>
+                                <a class="nav-link active" href="../minesweeper/minesweeper.html">Minesweeper</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
+        </div>
+
+        <!--game Windows-->
+        <div class="card text-center ">
+            <header class="card-header" id="gameTitle">MINESWEEPER</header>
+            <div class="card-body">
+                <section id="game">
+                    <div>MINESWEEPER</div>
+                    <script src="./js/minesweeper.js" charset="utf-8"></script>
+                    <table id="grid" name="grid" class="table table-borderless p-0 m-auto" style="width: 0%;"></table>
+                </section>
+            </div>
+            <div class="card-footer text-muted">
+                updated 2 days ago
+            </div>
         </div>
 
         <!--Game Description-->
@@ -74,20 +89,6 @@
             </div>
         </section>
 
-        <!--game Windows-->
-        <div class="card text-center ">
-            <header class="card-header" id="gameTitle">MINESWEEPER</header>
-            <div class="card-body">
-                <section id="game">
-                    <div>THIS IS GAME WINDOW</div>
-                    <script src="./js/minesweeper.js" charset="utf-8"></script>
-                    <table id="grid" name="grid" class="table table-borderless p-0 m-auto" style="width: 0%;"></table>
-                </section>
-            </div>
-            <div class="card-footer text-muted">
-                updated 2 days ago
-            </div>
-        </div>
 
         <!--Comments-->
         <custom-comment-section></custom-comment-section>
