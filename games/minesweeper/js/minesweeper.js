@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.oncontextmenu = new Function("return false");
     const grid = document.getElementById('grid');
+    const resultDisplay = document.querySelector('#result');
+    
 
     const cardArray = [
         {
@@ -60,10 +62,21 @@ document.addEventListener('DOMContentLoaded', () => {
             img: 'js/images/question.png'
         }
     ]
-    
+
+    let myVar = setInterval(myTimer, 1000);
+
+    function myTimer() {
+        if( resultDisplay.textContent == ""){
+            console.log("vacio")
+            return;
+        }
+        resultDisplay.textContent --;
+    }
+
     const button = document.getElementsByName("NewGame")[0];
-    button.onclick = function() {
-        generateGrid(); };
+    button.onclick = function () {
+        generateGrid();
+    };
 
     generateGrid();
 
@@ -100,6 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         addMines();
+        resultDisplay.textContent = 600;
+        myVar = setInterval(myTimer, 1000);
     }
 
     function changeImage(cell, numberAray) {
@@ -134,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
+        clearInterval(myVar);
     }
 
     function checkLevelCompletion() {
@@ -146,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (levelComplete) {
             //alert("You Win!");
             revealMines();
+            resultDisplay.textContent += " You win!";
         }
     }
 
@@ -153,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //Check if the end-user clicked on a mine
         if (cell.getAttribute("data-mine") == "true") {
             revealMines();
+            resultDisplay.textContent += " You lost.";
             //alert("Game Over");
         } else {
             //cell.className = "clicked";
