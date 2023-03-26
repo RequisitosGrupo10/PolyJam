@@ -15,7 +15,7 @@ class Navbar extends HTMLElement {
     this.innerHTML = `
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">PolyJam</a>
+        <a class="navbar-brand" href="/index.html">PolyJam</a>
         <button
           class="navbar-toggler"
           type="button"
