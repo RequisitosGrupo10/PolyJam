@@ -60,7 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
             img: 'js/images/question.png'
         }
     ]
-
+    
+    const button = document.getElementsByName("NewGame")[0];
+    button.onclick = function() {
+        generateGrid(); };
 
     generateGrid();
 
@@ -76,9 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 let img = document.createElement('img');
                 cell.appendChild(img);
                 changeImage(cell, 11);
-                cell.onclick = function () { 
+                cell.onclick = function () {
                     if (this.firstChild.getAttribute('name') == 'flag' || this.firstChild.getAttribute('name') == 'question') return false;
-                    clickCell(this); };
+                    clickCell(this);
+                };
                 cell.oncontextmenu = function () {
                     if (this.firstChild.getAttribute('name') == 'blank') {
                         changeImage(this, 12);
@@ -86,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         changeImage(this, 13);
                     } else if (this.firstChild.getAttribute('name') == 'question') {
                         changeImage(this, 11);
-                    }else{
+                    } else {
                         return false;
                     }
                 };
@@ -100,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function changeImage(cell, numberAray) {
         let image = cell.firstChild;
-        console.log(image);
+        //console.log(image);
         cell.setAttribute('class', 'p-0 m-0');
         image.setAttribute('src', cardArray[numberAray].img);
         image.setAttribute('name', cardArray[numberAray].name);
@@ -140,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         if (levelComplete) {
-            alert("You Win!");
+            //alert("You Win!");
             revealMines();
         }
     }
@@ -149,9 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
         //Check if the end-user clicked on a mine
         if (cell.getAttribute("data-mine") == "true") {
             revealMines();
-            alert("Game Over");
+            //alert("Game Over");
         } else {
-            cell.className = "clicked";
+            //cell.className = "clicked";
             //Count and display the number of adjacent mines
             let mineCount = 0;
             let cellRow = cell.parentNode.rowIndex;
@@ -162,15 +166,33 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (grid.rows[i].cells[j].getAttribute("data-mine") == "true") mineCount++;
                 }
             }
-            //cell.innerHTML = mineCount;
-            changeImage(cell, mineCount);
 
-            if (mineCount == 0) {
-                //Reveal all adjacent cells as they do not have a mine
+            if (cell.firstChild.getAttribute('name') != "blank") {
+                flag = 0;
                 for (let i = Math.max(cellRow - 1, 0); i <= Math.min(cellRow + 1, 9); i++) {
                     for (let j = Math.max(cellCol - 1, 0); j <= Math.min(cellCol + 1, 9); j++) {
-                        //Recursive Call
-                        if (grid.rows[i].cells[j].firstChild.getAttribute('name') == "blank") clickCell(grid.rows[i].cells[j]);
+                        if (grid.rows[i].cells[j].firstChild.getAttribute("name") == "flag") flag++;
+                    }
+                }
+                if (flag == mineCount) {
+                    for (let i = Math.max(cellRow - 1, 0); i <= Math.min(cellRow + 1, 9); i++) {
+                        for (let j = Math.max(cellCol - 1, 0); j <= Math.min(cellCol + 1, 9); j++) {
+                            //Recursive Call
+                            if (grid.rows[i].cells[j].firstChild.getAttribute('name') == "blank") clickCell(grid.rows[i].cells[j]);
+                        }
+                    }
+                }
+            } else {
+                //cell.innerHTML = mineCount;
+                changeImage(cell, mineCount);
+
+                if (mineCount == 0) {
+                    //Reveal all adjacent cells as they do not have a mine
+                    for (let i = Math.max(cellRow - 1, 0); i <= Math.min(cellRow + 1, 9); i++) {
+                        for (let j = Math.max(cellCol - 1, 0); j <= Math.min(cellCol + 1, 9); j++) {
+                            //Recursive Call
+                            if (grid.rows[i].cells[j].firstChild.getAttribute('name') == "blank") clickCell(grid.rows[i].cells[j]);
+                        }
                     }
                 }
             }

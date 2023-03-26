@@ -81,25 +81,27 @@ document.addEventListener('DOMContentLoaded', () => {
       if(optionOneId == optionTwoId) {
         cards[optionOneId].setAttribute('src', 'js/images/blank.png')
         cards[optionTwoId].setAttribute('src', 'js/images/blank.png')
-        alert('You have clicked the same image!')
+        //alert('You have clicked the same image!')
       }
       else if (cardsChosen[0] === cardsChosen[1]) {
-        alert('You found a match')
+        //alert('You found a match')
         cards[optionOneId].setAttribute('src', 'js/images/white.png')
         cards[optionTwoId].setAttribute('src', 'js/images/white.png')
         cards[optionOneId].removeEventListener('click', flipCard)
         cards[optionTwoId].removeEventListener('click', flipCard)
         cardsWon.push(cardsChosen)
+        resultDisplay.textContent = (resultDisplay.textContent == "" ? 0 : parseInt(resultDisplay.textContent)) + 5;
       } else {
         cards[optionOneId].setAttribute('src', 'js/images/blank.png')
         cards[optionTwoId].setAttribute('src', 'js/images/blank.png')
-        alert('Sorry, try again')
+        //alert('Sorry, try again')
+        resultDisplay.textContent = (resultDisplay.textContent == "" ? 0 : parseInt(resultDisplay.textContent)) - 1;
       }
       cardsChosen = []
       cardsChosenId = []
-      resultDisplay.textContent = cardsWon.length
+      //resultDisplay.textContent = cardsWon.length
       if  (cardsWon.length === cardArray.length/2) {
-        resultDisplay.textContent = 'Congratulations! You found them all!'
+        resultDisplay.textContent += ' Congratulations! You found them all!'
       }
     }
   

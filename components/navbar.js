@@ -7,7 +7,7 @@ class Navbar extends HTMLElement {
 
   connectedCallback() {
     const links = [
-      { url: "/", label: "Inicio" },
+      { url: "/", label: "Home" },
       { url: "/games/matchPairs/matchPairs.html", label: "Match Pairs" },
       { url: "/games/quiz/quiz.html", label: "Quiz" },
       { url: "/games/minesweeper/minesweeper.html", label: "MineSweeper" }
