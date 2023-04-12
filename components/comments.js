@@ -6,8 +6,8 @@ class CommentSection extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
         <section id="commentSection">
-        <div class="card bg-info my-2">
-          <h3 class="h3 text-center">Comments</h3>
+        <div class="card my-2" style="background-color: #cfd8dc">
+          <h3 class="h3 text-center" style="margin-top: 15px">Comments</h3>
           <div class="container my-1 py-1 text-dark" id="mainCommentContainer">
             <div class="row d-flex justify-content-center">
               <div class="col-md-11 col-lg-11 col-xl-11" id="parentDiv">
