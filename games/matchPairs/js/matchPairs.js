@@ -58,9 +58,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let cardsChosen = []
     let cardsChosenId = []
     let cardsWon = []
+
+
+    //const highScores = document.getElementById('highScores');
+    const highScoresModal = new bootstrap.Modal(document.getElementById('highScoresModal'));
+    const highScoresList = document.getElementById('highscoresList');
+
+
+
   
     //create your board
     function createBoard() {
+      highScoresModal.show();
       for (let i = 0; i < cardArray.length; i++) {
         const card = document.createElement('img')
         card.setAttribute('src', 'js/images/blank.png')
@@ -81,10 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if(optionOneId == optionTwoId) {
         cards[optionOneId].setAttribute('src', 'js/images/blank.png')
         cards[optionTwoId].setAttribute('src', 'js/images/blank.png')
-        //alert('You have clicked the same image!')
       }
       else if (cardsChosen[0] === cardsChosen[1]) {
-        //alert('You found a match')
         cards[optionOneId].setAttribute('src', 'js/images/white.png')
         cards[optionTwoId].setAttribute('src', 'js/images/white.png')
         cards[optionOneId].removeEventListener('click', flipCard)
@@ -101,6 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
       cardsChosenId = []
       //resultDisplay.textContent = cardsWon.length
       if  (cardsWon.length === cardArray.length/2) {
+        //Create a modal to store the high score
+        if (highScoresList.childElementCount < 5) {
+          // Añadimos el highscore directamente
+          highScoresModal.show();
+        }
         resultDisplay.textContent += ' Congratulations! You found them all!'
       }
     }
@@ -111,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cardsChosen.push(cardArray[cardId].name)
       cardsChosenId.push(cardId)
       this.setAttribute('src', cardArray[cardId].img)
-      if (cardsChosen.length ===2) {
+      if (cardsChosen.length === 2) {
         setTimeout(checkForMatch, 500)
       }
     }

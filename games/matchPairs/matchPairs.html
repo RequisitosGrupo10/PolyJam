@@ -14,39 +14,32 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
       <a class="navbar-brand" href="../../index.html">PolyJam</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item">
-              <a href="../../index.html" aria-current="page" class="nav-link ">
-                Home
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../matchPairs/matchPairs.html" class="nav-link active">
-                Match Pairs
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../quiz/quiz.html" class="nav-link">
-                Quiz
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../minesweeper/minesweeper.html" class="nav-link">
-                MineSweeper
-              </a>
-            </li>
+          <li class="nav-item">
+            <a href="../../index.html" aria-current="page" class="nav-link ">
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../matchPairs/matchPairs.html" class="nav-link active">
+              Match Pairs
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../quiz/quiz.html" class="nav-link">
+              Quiz
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../minesweeper/minesweeper.html" class="nav-link">
+              MineSweeper
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -103,6 +96,45 @@
           </p>
         </div>
       </section>
+
+      <!--High scores-->
+      <section id="highScores" class="card">
+        <div class="card-body">
+          <h6 class="card-subtitle text-end text-muted subtitle">
+            High scores
+          </h6>
+          <h4 class="card-title text-center">MATCH PAIRS - High scores</h4>
+          <div class="align-content-center">
+            <ol id="highscoresList">
+              <li>Juanito - 10</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- Modal -->
+      <div class="modal fade" id="highScoresModal" tabindex="-1" aria-labelledby="highScoresModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="highScoresModalLabel">NEW HIGHSCORE!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <label for="nameHighScore">Insert your name:</label>
+                <input type="text" class="form-control" name="nameHighScore" id="nameHighScore"> <br>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Don't save</button>
+              <button type="button" id="" class="btn btn-primary">Save highscore</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <!--Comments-->
       <custom-comment-section></custom-comment-section>
