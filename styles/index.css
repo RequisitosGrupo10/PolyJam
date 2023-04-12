@@ -31,3 +31,16 @@
     float: right;
     margin-bottom: 2rem
 }
+
+i{
+    font-size: 2em;
+    float: right;
+}
+
+.btn-primary{
+    margin-top: 6px;
+}
+
+.card-text{
+    margin-bottom: 10px;
+}
