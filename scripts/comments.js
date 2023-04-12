@@ -105,12 +105,11 @@ function submitButtonFuncion(e) {
         let deleteBtn = document.createElement("button");
         deleteBtn.setAttribute("type", "button");
         deleteBtn.setAttribute("class", "btn btn-danger");
-        deleteBtn.style.marginLeft = "10px";
         deleteBtn.innerHTML = "Delete";
         deleteBtn.addEventListener("click", () =>{
             parentDiv.removeChild(commentDiv);
         }, false);
-        commentDiv.appendChild(deleteBtn);
+        cardBodyDiv.appendChild(deleteBtn);
 
         parentDiv.appendChild(commentDiv);
         addCommentBtn.style.display = "inline";
