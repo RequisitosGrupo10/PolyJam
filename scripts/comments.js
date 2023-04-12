@@ -2,10 +2,10 @@ const allComments = document.querySelector(".commentDiv");
 const parentDiv = document.getElementById("parentDiv");
 const mainCommentContainer = document.getElementById("mainCommentContainer");
 const addCommentBtn = document.getElementById("addCommentBtn");
+const removeCommentBtn = document.getElementsByClassName("removeCommentBtn");
 
 const commentsPerPage = 5;
 //const numberOfPages = Math.ceil(allComments.childElementCount / commentsPerPage);
-
 
 function addComment() {
     addCommentBtn.style.display = "none";
@@ -101,6 +101,16 @@ function submitButtonFuncion(e) {
         let commentP = document.createElement("p");
         commentP.innerHTML = commentText;
         article.appendChild(commentP);
+
+        let deleteBtn = document.createElement("button");
+        deleteBtn.setAttribute("type", "button");
+        deleteBtn.setAttribute("class", "btn btn-danger");
+        deleteBtn.style.marginLeft = "10px";
+        deleteBtn.innerHTML = "Delete";
+        deleteBtn.addEventListener("click", () =>{
+            parentDiv.removeChild(commentDiv);
+        }, false);
+        commentDiv.appendChild(deleteBtn);
 
         parentDiv.appendChild(commentDiv);
         addCommentBtn.style.display = "inline";
