@@ -7,7 +7,8 @@ const removeCommentBtn = document.getElementsByClassName("removeCommentBtn");
 const commentsPerPage = 5;
 //const numberOfPages = Math.ceil(allComments.childElementCount / commentsPerPage);
 
-function addComment() {
+function addComment(name, text) {
+    
     addCommentBtn.style.display = "none";
 
     let form = document.createElement("form");
@@ -26,6 +27,8 @@ function addComment() {
     displayedName.setAttribute("type", "text");
     displayedName.setAttribute("class", "commentInput form-control w-25");
     displayedName.setAttribute("id", "displayedName")
+    if (name !== null)
+        displayedName.setAttribute("value", name);
     form.appendChild(displayedName);
 
     let commentLabel = document.createElement("label");
@@ -39,6 +42,8 @@ function addComment() {
     textarea.setAttribute("class", "commentInput form-control w-50");
     textarea.setAttribute("rows", "3");
     textarea.setAttribute("id", "commentText");
+    if (text != null)
+        textarea.innerHTML = text;
     form.appendChild(textarea);
 
     form.appendChild(document.createElement("br"));
@@ -64,7 +69,9 @@ function addComment() {
     mainCommentContainer.appendChild(form);
 }
 
-addCommentBtn.addEventListener("click", addComment, false);
+addCommentBtn.addEventListener("click", () =>{
+    addComment(null, null)
+}, false);
 
 function submitButtonFuncion(e) {
     let displayedName = document.getElementById("displayedName").value;
@@ -101,10 +108,21 @@ function submitButtonFuncion(e) {
         let commentP = document.createElement("p");
         commentP.innerHTML = commentText;
         article.appendChild(commentP);
+        
+        let editBtn = document.createElement("button");
+        editBtn.setAttribute("type", "button");
+        editBtn.setAttribute("class", "btn btn-primary");
+        editBtn.innerHTML = "Edit";
+        editBtn.addEventListener("click", () =>{
+            parentDiv.removeChild(commentDiv);
+            addComment(displayedName, commentText);
+        }, false);
+        cardBodyDiv.appendChild(editBtn);
 
         let deleteBtn = document.createElement("button");
         deleteBtn.setAttribute("type", "button");
         deleteBtn.setAttribute("class", "btn btn-danger");
+        deleteBtn.style.marginLeft = "20px";
         deleteBtn.innerHTML = "Delete";
         deleteBtn.addEventListener("click", () =>{
             parentDiv.removeChild(commentDiv);
