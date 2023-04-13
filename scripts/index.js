@@ -6,6 +6,13 @@ const searchInput = document.getElementById("searchInput")
 function doSearch(searchValue) {
     if(!searchValue){
         searchValue = searchInput.value; // if searchValue is empty, show all games
+        if(searchValue === ""){
+            updateStatusBar("");
+        }else{      
+            updateStatusBar("Showing results for: " + searchValue);
+        }
+    } else{
+        updateStatusBar(searchValue + " games");
     }
     const games = gameCatalog.children;
     for (let i = 0; i < games.length; i++) {
@@ -42,6 +49,10 @@ function collectTags(){
 }
 function clicked(text){
     console.log(text);
+}
+
+function updateStatusBar(status){
+    document.getElementById("statusBar").innerHTML = status;
 }
 
 document.onload = collectTags();

@@ -78,4 +78,5 @@ footer ul {
     margin: 5px;
     font-size: 12px;
     text-transform: uppercase;
+    cursor: pointer;
   }
