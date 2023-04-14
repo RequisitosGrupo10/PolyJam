@@ -5,6 +5,12 @@ const minesweeperStar = document.getElementById("minesweeperStar");
 matchPairsStar.addEventListener("click", function() {
     matchPairsStar.classList.toggle("bi-star");
     matchPairsStar.classList.toggle("bi-star-fill");
+
+    if (matchPairsStar.classList.contains("bi-star")) {
+        console.log("Im in bi-star");
+    } else {
+
+    }
 });
 
 quickQuizStar.addEventListener("click", function() {
