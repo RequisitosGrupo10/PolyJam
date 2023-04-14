@@ -38,7 +38,6 @@ searchButton.addEventListener("click", function (e) {
     doSearch();
 }, false);
 
-
 function collectTags(){
     const allTags = document.querySelectorAll('.tags > span');
     for(let i = 0; i < allTags.length; i++){
