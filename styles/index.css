@@ -31,3 +31,8 @@
     float: right;
     margin-bottom: 2rem
 }
+
+#statusBar{
+    font-weight: 400;
+    font-size: 2rem;
+}
