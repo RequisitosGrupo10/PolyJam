@@ -10,23 +10,22 @@ function load() {
         const gameTuple = {key: gameName, element: gameStar};
         const favouriteValue = localStorage.getItem(gameName);
 
-        if (favouriteValue == 'false' || favouriteValue == null) {
-            game.setAttribute("style", "display: none !important;");
-        } else if (favouriteValue == 'true') {
-            if (game.getAttribute("style") != null) {
-                game.removeAttribute("style");
-            }
+        if (favouriteValue == 'true') {
+            gameStar.classList.toggle("bi-star");
+            gameStar.classList.toggle("bi-star-fill");
         }
-
+        
         gameStar.addEventListener("click", () => clicked(gameTuple));
     }
 }
 
 function clicked(gameTuple) {
-    if (gameTuple.element.classList.contains("bi-star")) {
+    gameTuple.element.classList.toggle("bi-star");
+    gameTuple.element.classList.toggle("bi-star-fill");
+
+    if (gameTuple.element.classList.contains("bi-star-fill")) {
         localStorage.setItem(gameTuple.key, 'true');
     } else {
         localStorage.setItem(gameTuple.key, 'false');
     }
-    load();
 }
