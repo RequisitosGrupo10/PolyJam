@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.oncontextmenu = new Function("return false");
     const grid = document.getElementById('grid');
     const resultDisplay = document.querySelector('#result');
-    
+
 
     const cardArray = [
         {
@@ -63,14 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ]
 
-    let myVar = setInterval(myTimer, 1000);
+    let myVar;
+    let timesClicked = 0;
 
     function myTimer() {
-        if( resultDisplay.textContent == ""){
+        if (resultDisplay.textContent == "") {
             console.log("vacio")
             return;
         }
-        resultDisplay.textContent --;
+        resultDisplay.textContent--;
     }
 
     const button = document.getElementsByName("NewGame")[0];
@@ -114,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         addMines();
         resultDisplay.textContent = 600;
-        myVar = setInterval(myTimer, 1000);
+        timesClicked = 0;
     }
 
     function changeImage(cell, numberAray) {
@@ -135,6 +136,24 @@ document.addEventListener('DOMContentLoaded', () => {
             let cell = grid.rows[row].cells[col];
             if (cell.getAttribute('data-mine') == 'true') i--;
             cell.setAttribute("data-mine", "true");
+        }
+    }
+
+    function changeMine(cellRow, cellCol) {
+        //Add mines randomly
+        
+        cell = grid.rows[cellRow].cells[cellCol];
+        cell.setAttribute('data-mine', 'false');
+
+        for (let i = 0; i < 1; i++) {
+            let row = Math.floor(Math.random() * 10);
+            let col = Math.floor(Math.random() * 10);
+            let cell = grid.rows[row].cells[col];
+            if (cell.getAttribute('data-mine') == 'true' || (row == cellRow && col == cellCol)){
+                i--;
+            } else{
+                cell.setAttribute("data-mine", "true");
+            }
         }
     }
 
@@ -162,17 +181,32 @@ document.addEventListener('DOMContentLoaded', () => {
         if (levelComplete) {
             //alert("You Win!");
             revealMines();
+            timesClicked = 0;
             resultDisplay.textContent += " You win!";
         }
     }
 
     function clickCell(cell) {
         //Check if the end-user clicked on a mine
+
+        if (timesClicked == 0) {
+            if (cell.getAttribute("data-mine") == "true") {
+                let cellRow = cell.parentNode.rowIndex;
+                let cellCol = cell.cellIndex;
+                changeMine(cellRow, cellCol);
+                clickCell(cell);
+            }
+            myVar = setInterval(myTimer, 1000);
+        }
+
+
         if (cell.getAttribute("data-mine") == "true") {
+            timesClicked = 0;
             revealMines();
             resultDisplay.textContent += " You lost.";
             //alert("Game Over");
         } else {
+            timesClicked++;
             //cell.className = "clicked";
             //Count and display the number of adjacent mines
             let mineCount = 0;

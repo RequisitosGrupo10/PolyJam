@@ -66,42 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateHighScoresList(userName, score) {
     if (userName != "") {//&& score != ""
-      score = parseInt(score);
 
-      let auxListItem = highScoresList.firstElementChild;
-      //console.log(auxListItem);
-      let auxScore = auxListItem.firstElementChild.firstElementChild;
-
-      while (score <= auxScore && auxListItem.nextSibling != null) {
-        auxListItem = auxListItem.nextSibling;
-        auxScore = auxListItem.firstElementChild.firstElementChild;
-        console.log(auxListItem);
-      }
-
-      //Creo nuevo nodo
-      let newItem = document.createElement("li");
-      let newP = document.createElement("p");
-      let newText = document.createTextNode(userName + " - ");
-      let newStrong = document.createElement("strong");
-      let newScore = document.createTextNode(score);
-
-      newStrong.appendChild(newScore);
-      newP.appendChild(newText);
-      newP.appendChild(newStrong);
-      newItem.appendChild(newP);
-
-      highScoresList.insertBefore(newItem, auxListItem);
-
-      if (highScoresList.childElementCount >= 5) {
-        highScoresList.removeChild(highScoresList.lastElementChild);
-      }
+      addNewScore(userName, score);
 
       //Local storage update
       auxListItem = highScoresList.firstElementChild;
       let actualHighScores = [];
-      while (auxListItem.nextSibling != null) {
+      while (auxListItem != null) {
         nombre = auxListItem.firstElementChild.textContent;
-        numero = auxListItem.firstElementChild.textContent;
+        numero = auxListItem.lastElementChild.textContent;
         actualHighScores.push(nombre);
         actualHighScores.push(numero);
         numeroreturned = JSON.parse(JSON.stringify(actualHighScores));
@@ -124,28 +97,62 @@ document.addEventListener('DOMContentLoaded', () => {
       size = actualHighScores.length;
       for (i = 0; i < size; i++) {
         //Creo nuevo nodo
-        highScoreElement =  JSON.parse(actualHighScores[i]);
+        highScoreName = actualHighScores[i];
+        i++;
+        highScoreValue = actualHighScores[i];
 
-        let newItem = document.createElement("li");
-        let newP = document.createElement("p");
-        let newText = document.createTextNode(highScoreElement[0] + " - ");
-        let newStrong = document.createElement("strong");
-        let newScore = document.createTextNode(highScoreElement[1]);
+        addNewScore(highScoreName, highScoreValue);
+      }
+    }
+  }
 
-        newStrong.appendChild(newScore);
-        newP.appendChild(newText);
-        newP.appendChild(newStrong);
-        newItem.appendChild(newP);
-        
+  function addNewScore(name, score) {
+
+    score = parseInt(score);
+
+    //Creo nuevo nodo
+    let newItem = document.createElement("li");
+    let newSpan = document.createElement("span");
+    let newName = document.createTextNode(name);
+    let newGuion = document.createTextNode(" - ");
+    let newStrong = document.createElement("strong");
+    let newScore = document.createTextNode(score);
+
+    newStrong.appendChild(newScore);
+    newSpan.appendChild(newName);
+
+    newItem.appendChild(newSpan);
+    newItem.appendChild(newGuion);
+    newItem.appendChild(newStrong);
+
+    if (highScoresList.childElementCount > 0) {
+      let auxListItem = highScoresList.firstElementChild;
+      let auxScore = auxListItem.lastElementChild.textContent;
+
+      while (score >= auxScore && auxListItem.nextSibling != null) {
+        auxListItem = auxListItem.nextSibling;
+        auxScore = auxListItem.lastElementChild;
+        console.log(auxListItem);
+      }
+      if (score < auxScore) {
         highScoresList.appendChild(newItem);
+      } else {
+        highScoresList.insertBefore(newItem, auxListItem);
       }
 
+      if (highScoresList.childElementCount >= 5) {
+        highScoresList.removeChild(highScoresList.lastElementChild);
+      }
+    } else {
+
+      highScoresList.appendChild(newItem);
     }
   }
 
   //create your board
   function createBoard() {
-    highScoresModal.show();
+    //highScoresModal.show();
+    //localStorage.clear();
     loadFromLocalStorage();
 
     for (let i = 0; i < cardArray.length; i++) {
