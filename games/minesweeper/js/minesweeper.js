@@ -66,6 +66,100 @@ document.addEventListener('DOMContentLoaded', () => {
     let myVar;
     let timesClicked = 0;
 
+
+    const highScoresModal = new bootstrap.Modal(document.getElementById('highScoresModal'));
+    let highScoresList = document.getElementById('highscoresList');
+    const saveHighscoreButton = document.getElementById('saveHighscore');
+    saveHighscoreButton.addEventListener("click", function () { saveHighscore() });
+
+    function updateHighScoresList(userName, score) {
+        if (userName != "") {//&& score != ""
+
+            addNewScore(userName, score);
+
+            //Local storage update
+            auxListItem = highScoresList.firstElementChild;
+            let actualHighScores = [];
+            while (auxListItem != null) {
+                nombre = auxListItem.firstElementChild.textContent;
+                numero = auxListItem.lastElementChild.textContent;
+                actualHighScores.push(nombre);
+                actualHighScores.push(numero);
+                numeroreturned = JSON.parse(JSON.stringify(actualHighScores));
+                auxListItem = auxListItem.nextSibling;
+            }
+            localStorage.setItem('minesweeperHighScores', JSON.stringify(actualHighScores));
+        }
+    }
+
+    function saveHighscore() {
+        let userName = document.getElementById('nameHighScore').value;
+        updateHighScoresList(userName, resultDisplay.textContent);
+        highScoresModal.hide();
+    }
+
+    function loadFromLocalStorage() {
+        if (localStorage.getItem("minesweeperHighScores") != null) {
+            actualHighScores = JSON.parse(localStorage.getItem('minesweeperHighScores'));
+            //console.log(actualHighScores);
+            size = actualHighScores.length;
+            for (i = 0; i < size; i++) {
+                //Creo nuevo nodo
+                highScoreName = actualHighScores[i];
+                i++;
+                highScoreValue = actualHighScores[i];
+
+                addNewScore(highScoreName, highScoreValue);
+            }
+        }
+    }
+
+    function addNewScore(name, score) {
+
+        score = parseInt(score);
+
+        //Creo nuevo nodo
+        let newItem = document.createElement("li");
+        let newSpan = document.createElement("span");
+        let newName = document.createTextNode(name);
+        let newGuion = document.createTextNode(" - ");
+        let newStrong = document.createElement("strong");
+        let newScore = document.createTextNode(score);
+
+        newStrong.appendChild(newScore);
+        newSpan.appendChild(newName);
+
+        newItem.appendChild(newSpan);
+        newItem.appendChild(newGuion);
+        newItem.appendChild(newStrong);
+
+        if (highScoresList.childElementCount > 0) {
+            let auxListItem = highScoresList.firstElementChild;
+            let auxScore = auxListItem.lastElementChild.textContent;
+
+            while (score <= auxScore && auxListItem.nextSibling != null) {
+                auxListItem = auxListItem.nextSibling;
+                auxScore = auxListItem.lastElementChild.textContent;
+                console.log(auxListItem);
+            }
+            if (score < auxScore) {
+                highScoresList.insertBefore(newItem, auxListItem);
+                highScoresList.insertBefore(auxListItem, newItem);
+            } else {
+                highScoresList.insertBefore(newItem, auxListItem);
+            }
+
+            if (highScoresList.childElementCount >= 5) {
+                highScoresList.removeChild(highScoresList.lastElementChild);
+            }
+        } else {
+
+            highScoresList.appendChild(newItem);
+        }
+    }
+
+
+
     function myTimer() {
         if (resultDisplay.textContent == "") {
             console.log("vacio")
@@ -77,11 +171,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementsByName("NewGame")[0];
     button.onclick = function () {
         generateGrid();
+        clearInterval(myVar);
+
     };
 
     generateGrid();
+    loadFromLocalStorage();
+    //localStorage.clear(); 
 
     function generateGrid() {
+
         //generate 10 by 10 grid
         grid.innerHTML = "";
         for (let i = 0; i < 10; i++) {
@@ -141,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function changeMine(cellRow, cellCol) {
         //Add mines randomly
-        
+
         cell = grid.rows[cellRow].cells[cellCol];
         cell.setAttribute('data-mine', 'false');
 
@@ -149,9 +248,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let row = Math.floor(Math.random() * 10);
             let col = Math.floor(Math.random() * 10);
             let cell = grid.rows[row].cells[col];
-            if (cell.getAttribute('data-mine') == 'true' || (row == cellRow && col == cellCol)){
+            if (cell.getAttribute('data-mine') == 'true' || (row == cellRow && col == cellCol)) {
                 i--;
-            } else{
+            } else {
                 cell.setAttribute("data-mine", "true");
             }
         }
@@ -182,6 +281,17 @@ document.addEventListener('DOMContentLoaded', () => {
             //alert("You Win!");
             revealMines();
             timesClicked = 0;
+
+            //Create a modal to store the high score
+            if (highScoresList.childElementCount < 5) {
+                // Añadimos el highscore directamente
+                highScoresModal.show();
+            } else {
+                if (parseInt(resultDisplay.textContent) > highScoresList.lastElementChild.firstElementChild.firstElementChild) {
+                    highScoresModal.show();
+                }
+            }
+
             resultDisplay.textContent += " You win!";
         }
     }
@@ -195,8 +305,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 let cellCol = cell.cellIndex;
                 changeMine(cellRow, cellCol);
                 clickCell(cell);
+            } else {
+                myVar = setInterval(myTimer, 1000);
             }
-            myVar = setInterval(myTimer, 1000);
         }
 
 

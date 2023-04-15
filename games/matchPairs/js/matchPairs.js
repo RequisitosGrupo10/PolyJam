@@ -131,11 +131,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       while (score >= auxScore && auxListItem.nextSibling != null) {
         auxListItem = auxListItem.nextSibling;
-        auxScore = auxListItem.lastElementChild;
+        auxScore = auxListItem.lastElementChild.textContent;
         console.log(auxListItem);
       }
       if (score < auxScore) {
-        highScoresList.appendChild(newItem);
+        highScoresList.insertBefore(newItem, auxListItem);
+        highScoresList.insertBefore(auxListItem, newItem);
       } else {
         highScoresList.insertBefore(newItem, auxListItem);
       }
