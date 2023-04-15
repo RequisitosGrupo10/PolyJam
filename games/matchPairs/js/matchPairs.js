@@ -96,24 +96,15 @@ document.addEventListener('DOMContentLoaded', () => {
         highScoresList.removeChild(highScoresList.lastElementChild);
       }
 
-
       //Local storage update
       auxListItem = highScoresList.firstElementChild;
       let actualHighScores = [];
       while (auxListItem.nextSibling != null) {
-        nombre = auxListItem.firstElementChild.firstChild;
-        numero = auxListItem.firstElementChild.firstElementChild.firstChild;
-        console.log([nombre , numero]);
+        nombre = auxListItem.firstElementChild.textContent;
+        numero = auxListItem.firstElementChild.textContent;
         actualHighScores.push(nombre);
         actualHighScores.push(numero);
-
-        console.log(nombre)
-        console.log(numero)
-        console.log(actualHighScores)
         numeroreturned = JSON.parse(JSON.stringify(actualHighScores));
-        console.log(JSON.stringify(actualHighScores))
-        console.log(numeroreturned[0])
-        
         auxListItem = auxListItem.nextSibling;
       }
       localStorage.setItem('matchPairsHighScores', JSON.stringify(actualHighScores));
@@ -133,9 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
       size = actualHighScores.length;
       for (i = 0; i < size; i++) {
         //Creo nuevo nodo
-
         highScoreElement =  JSON.parse(actualHighScores[i]);
-        //console.log(highScoreElement);
 
         let newItem = document.createElement("li");
         let newP = document.createElement("p");
