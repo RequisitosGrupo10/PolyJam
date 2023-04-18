@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.oncontextmenu = new Function("return false");
     const grid = document.getElementById('grid');
     const resultDisplay = document.querySelector('#result');
-
+    
 
     const cardArray = [
         {
@@ -63,124 +63,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ]
 
-    let myVar;
-    let timesClicked = 0;
-
-
-    const highScoresModal = new bootstrap.Modal(document.getElementById('highScoresModal'));
-    let highScoresList = document.getElementById('highscoresList');
-    const saveHighscoreButton = document.getElementById('saveHighscore');
-    saveHighscoreButton.addEventListener("click", function () { saveHighscore() });
-
-    function updateHighScoresList(userName, score) {
-        if (userName != "") {//&& score != ""
-
-            addNewScore(userName, score);
-
-            //Local storage update
-            auxListItem = highScoresList.firstElementChild;
-            let actualHighScores = [];
-            while (auxListItem != null) {
-                nombre = auxListItem.firstElementChild.textContent;
-                numero = auxListItem.lastElementChild.textContent;
-                actualHighScores.push(nombre);
-                actualHighScores.push(numero);
-                numeroreturned = JSON.parse(JSON.stringify(actualHighScores));
-                auxListItem = auxListItem.nextSibling;
-            }
-            localStorage.setItem('minesweeperHighScores', JSON.stringify(actualHighScores));
-        }
-    }
-
-    function saveHighscore() {
-        let userName = document.getElementById('nameHighScore').value;
-        updateHighScoresList(userName, resultDisplay.textContent);
-        highScoresModal.hide();
-    }
-
-    function loadFromLocalStorage() {
-        if (localStorage.getItem("minesweeperHighScores") != null) {
-            actualHighScores = JSON.parse(localStorage.getItem('minesweeperHighScores'));
-            //console.log(actualHighScores);
-            size = actualHighScores.length;
-            for (i = 0; i < size; i++) {
-                //Creo nuevo nodo
-                highScoreName = actualHighScores[i];
-                i++;
-                highScoreValue = actualHighScores[i];
-
-                addNewScore(highScoreName, highScoreValue);
-            }
-        }
-    }
-
-    function addNewScore(name, score) {
-
-        score = parseInt(score);
-
-        //Creo nuevo nodo
-        let newItem = document.createElement("li");
-        let newSpan = document.createElement("span");
-        let newName = document.createTextNode(name);
-        let newGuion = document.createTextNode(" - ");
-        let newStrong = document.createElement("strong");
-        let newScore = document.createTextNode(score);
-
-        newStrong.appendChild(newScore);
-        newSpan.appendChild(newName);
-
-        newItem.appendChild(newSpan);
-        newItem.appendChild(newGuion);
-        newItem.appendChild(newStrong);
-
-        if (highScoresList.childElementCount > 0) {
-            let auxListItem = highScoresList.firstElementChild;
-            let auxScore = auxListItem.lastElementChild.textContent;
-
-            while (score <= auxScore && auxListItem.nextSibling != null) {
-                auxListItem = auxListItem.nextSibling;
-                auxScore = auxListItem.lastElementChild.textContent;
-                console.log(auxListItem);
-            }
-            if (score < auxScore) {
-                highScoresList.insertBefore(newItem, auxListItem);
-                highScoresList.insertBefore(auxListItem, newItem);
-            } else {
-                highScoresList.insertBefore(newItem, auxListItem);
-            }
-
-            if (highScoresList.childElementCount >= 5) {
-                highScoresList.removeChild(highScoresList.lastElementChild);
-            }
-        } else {
-
-            highScoresList.appendChild(newItem);
-        }
-    }
-
-
+    let myVar = setInterval(myTimer, 1000);
 
     function myTimer() {
-        if (resultDisplay.textContent == "") {
+        if( resultDisplay.textContent == ""){
             console.log("vacio")
             return;
         }
-        resultDisplay.textContent--;
+        resultDisplay.textContent --;
     }
 
     const button = document.getElementsByName("NewGame")[0];
     button.onclick = function () {
         generateGrid();
-        clearInterval(myVar);
-
     };
 
     generateGrid();
-    loadFromLocalStorage();
-    //localStorage.clear(); 
 
     function generateGrid() {
-
         //generate 10 by 10 grid
         grid.innerHTML = "";
         for (let i = 0; i < 10; i++) {
@@ -214,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         addMines();
         resultDisplay.textContent = 600;
-        timesClicked = 0;
+        myVar = setInterval(myTimer, 1000);
     }
 
     function changeImage(cell, numberAray) {
@@ -235,24 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
             let cell = grid.rows[row].cells[col];
             if (cell.getAttribute('data-mine') == 'true') i--;
             cell.setAttribute("data-mine", "true");
-        }
-    }
-
-    function changeMine(cellRow, cellCol) {
-        //Add mines randomly
-
-        cell = grid.rows[cellRow].cells[cellCol];
-        cell.setAttribute('data-mine', 'false');
-
-        for (let i = 0; i < 1; i++) {
-            let row = Math.floor(Math.random() * 10);
-            let col = Math.floor(Math.random() * 10);
-            let cell = grid.rows[row].cells[col];
-            if (cell.getAttribute('data-mine') == 'true' || (row == cellRow && col == cellCol)) {
-                i--;
-            } else {
-                cell.setAttribute("data-mine", "true");
-            }
         }
     }
 
@@ -280,44 +162,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (levelComplete) {
             //alert("You Win!");
             revealMines();
-            timesClicked = 0;
-
-            //Create a modal to store the high score
-            if (highScoresList.childElementCount < 5) {
-                // Añadimos el highscore directamente
-                highScoresModal.show();
-            } else {
-                if (parseInt(resultDisplay.textContent) > highScoresList.lastElementChild.firstElementChild.firstElementChild) {
-                    highScoresModal.show();
-                }
-            }
-
             resultDisplay.textContent += " You win!";
         }
     }
 
     function clickCell(cell) {
         //Check if the end-user clicked on a mine
-
-        if (timesClicked == 0) {
-            if (cell.getAttribute("data-mine") == "true") {
-                let cellRow = cell.parentNode.rowIndex;
-                let cellCol = cell.cellIndex;
-                changeMine(cellRow, cellCol);
-                clickCell(cell);
-            } else {
-                myVar = setInterval(myTimer, 1000);
-            }
-        }
-
-
         if (cell.getAttribute("data-mine") == "true") {
-            timesClicked = 0;
             revealMines();
             resultDisplay.textContent += " You lost.";
             //alert("Game Over");
         } else {
-            timesClicked++;
             //cell.className = "clicked";
             //Count and display the number of adjacent mines
             let mineCount = 0;

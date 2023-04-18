@@ -73,7 +73,6 @@ getNewQuestion = () => {
     if (questionCounter >= MAX_QUESTIONS) {
         nextBtn.innerHTML = "End";
     }
-    
     progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
     //Update the progress bar
     progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
@@ -90,7 +89,6 @@ getNewQuestion = () => {
     availableQuesions.splice(questionIndex, 1);
     acceptingAnswers = true;
 };
-
 
 choices.forEach((choice) => {
     choice.addEventListener('click', (e) => {
@@ -110,23 +108,14 @@ choices.forEach((choice) => {
         selectedChoice.parentElement.classList.add(classToApply);
 
         if (classToApply === 'incorrect') {
-            feedback.className += " my-3"
             feedback.innerHTML = "The correct answer was: " + currentQuestion['choice' + currentQuestion.answer];
         }
 
-        nextBtn.removeAttribute('disabled');
-        nextBtn.classList.toggle('btn-disabled');
-        
-        const clickOnNext = function nextQuestions(e) {
+        nextBtn.addEventListener('click', () => {
             selectedChoice.parentElement.classList.remove(classToApply);
             feedback.innerHTML = "";
             getNewQuestion();
-            nextBtn.removeEventListener('click', clickOnNext);
-            nextBtn.setAttribute('disabled', 'true');
-            nextBtn.classList.toggle('btn-disabled');
-        }
-
-        nextBtn.addEventListener('click', clickOnNext);
+        });
     });
 });
 

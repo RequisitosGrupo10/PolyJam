@@ -2,150 +2,108 @@
 <html lang="en">
 
 <head>
-  <title class="title">PolyJam - Match Pairs</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <link rel="stylesheet" href="../../styles/gamePage.css" />
-  <link rel="stylesheet" href="../../styles/comments.css" />
+    <title class="title">PolyJam - Match Pairs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../styles/gamePage.css" />
+    <link rel="stylesheet" href="../../styles/comments.css" />
 </head>
 
 <body class="bg-light">
-  <!--Nav-->
+    <!--Nav-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="../../index.html">PolyJam</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a href="../../index.html" aria-current="page" class="nav-link">
-                Home
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../../favourite/favourite.html" class="nav-link">
-                Favourite Games
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../matchPairs/matchPairs.html" class="nav-link">
-                Match Pairs
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../quiz/quiz.html" class="nav-link">
-                Quiz
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../minesweeper/minesweeper.html" class="nav-link active">
-                MineSweeper
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../../account/times.html" class="nav-link">
-                Times
-              </a>
-            </li>
-          </ul>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.html">PolyJam</a>
+            <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a href="../../index.html" aria-current="page" class="nav-link">
+                    Home
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../matchPairs/matchPairs.html" class="nav-link">
+                    Match Pairs
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../quiz/quiz.html" class="nav-link">
+                    Quiz
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../minesweeper/minesweeper.html" class="nav-link active">
+                    MineSweeper
+                  </a>
+                </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
     <div class=" mx-auto w-75 container-fluid bg-light" id="wrapper">
-      <!--game Windows-->
-      <div class="card text-center my-2">
-        <header class="card-header" id="gameTitle">MINESWEEPER</header>
-        <div class="card-body">
-          <section id="game">
-            <div>MINESWEEPER</div>
-            <script src="./js/minesweeper.js" charset="utf-8"></script>
-            <h3>Score: <span id="result"></span></h3>
-            <table id="grid" name="grid" class="table table-borderless p-0 m-auto" style="width: 0%;"></table>
-            <br>
-            <button name="NewGame" type="button" class="btn btn-primary">New game</button>
-          </section>
-        </div>
-        <div class="cart-footer tags">
-          <span class="tag">Logic</span>
-          <span class="tag">Single player</span>
-          <span class="tag visually-hidden">Top ranked</span>
-        </div>
-        <div class="card-footer text-muted">
-          updated 2 days ago
-        </div>
-      </div>
-
-      <!--Game Description-->
-      <section id="generalDescription" class="card">
-        <div class="card-body">
-          <h6 class="card-subtitle text-end text-muted subtitle">Description</h6>
-          <h4 class="card-title text-center">MINESWEEPER</h4>
-
-          <article id="description" class="title">
-            <p class="card-text help_text"><strong>Objective</strong>: Get all the bombs without exploding any of
-              them.<br>
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!--Game Instructions-->
-      <section id="instructions" class="card">
-        <div class="card-body">
-          <h6 class="card-subtitle text-end text-muted subtitle">How to play?</h6>
-          <h4 class="card-title text-center">MINESWEEPER - Instructions</h4>
-          <p class="card-text help_text">
-            Minesweeper is a game where mines are hidden in a grid of squares. Safe squares have numbers telling
-            you how many mines touch the square. You can use the number clues to solve the game by opening all
-            of the safe squares. If you click on a mine you lose the game! <br>
-            You open squares with the left mouse button and put flags on mines with the right mouse button.
-            Pressing the right mouse button again changes your flag into a questionmark. When you open a square
-            that does not touch any mines, it will be empty and the adjacent squares will automatically open in
-            all directions until reaching squares that contain numbers. <br>
-          </p>
-        </div>
-      </section>
-      <!--High scores-->
-      <section id="highScores" class="card">
-        <div class="card-body">
-          <h6 class="card-subtitle text-end text-muted subtitle">
-            High scores
-          </h6>
-          <h4 class="card-title text-center">MINESWEEPER - High scores</h4>
-          <div class="align-content-center">
-            <ol id="highscoresList">
-            </ol>
-          </div>
-        </div>
-      </section>
-      <!-- Comments -->
-      <custom-comment-section></custom-comment-section>
-
-      <!-- Modal -->
-      <div class="modal fade" id="highScoresModal" tabindex="-1" aria-labelledby="highScoresModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="highScoresModalLabel">NEW HIGHSCORE!</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!--game Windows-->
+        <div class="card text-center my-2">
+            <header class="card-header" id="gameTitle">MINESWEEPER</header>
+            <div class="card-body">
+                <section id="game">
+                    <div>MINESWEEPER</div>
+                    <script src="./js/minesweeper.js" charset="utf-8"></script>
+                    <h3>Score: <span id="result"></span></h3>
+                    <table id="grid" name="grid" class="table table-borderless p-0 m-auto" style="width: 0%;"></table>
+                    <br>
+                    <button name="NewGame" type="button" class="btn btn-primary">New game</button>
+                </section>
             </div>
-            <div class="modal-body">
-              <form>
-                <label for="nameHighScore">Insert your name:</label>
-                <input type="text" class="form-control" name="nameHighScore" id="nameHighScore"> <br>
-              </form>
+            <div class="card-footer text-muted">
+                updated 2 days ago
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Don't save</button>
-              <button type="button" id="saveHighscore" class="btn btn-primary">Save highscore</button>
-            </div>
-          </div>
         </div>
-      </div>
+
+        <!--Game Description-->
+        <section id="generalDescription" class="card">
+            <div class="card-body">
+                <h6 class="card-subtitle text-end text-muted subtitle">Description</h6>
+                <h4 class="card-title text-center">MINESWEEPER</h4>
+
+                <article id="description" class="title">
+                    <p class="card-text help_text"><strong>Objective</strong>: Get all the bombs without exploding any of them.<br>
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!--Game Instructions-->
+        <section id="instructions" class="card">
+            <div class="card-body">
+                <h6 class="card-subtitle text-end text-muted subtitle">How to play?</h6>
+                <h4 class="card-title text-center">MINESWEEPER - Instructions</h4>
+                <p class="card-text help_text">
+                    Minesweeper is a game where mines are hidden in a grid of squares. Safe squares have numbers telling
+                    you how many mines touch the square. You can use the number clues to solve the game by opening all
+                    of the safe squares. If you click on a mine you lose the game! <br>
+                    You open squares with the left mouse button and put flags on mines with the right mouse button.
+                    Pressing the right mouse button again changes your flag into a questionmark. When you open a square
+                    that does not touch any mines, it will be empty and the adjacent squares will automatically open in
+                    all directions until reaching squares that contain numbers. <br>
+                </p>
+            </div>
+        </section>
+
+        <!-- Comments -->
+        <custom-comment-section></custom-comment-section>
+
+        
     </div>
     <!-- Footer -->
     <custom-footer></custom-footer>
@@ -154,12 +112,8 @@
     <!--<script type="text/javascript" src="/components/navbar.js"></script>-->
     <script type="text/javascript" src="../../scripts/comments.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"></script>
-    <script>
-      localStorage.actualGame = "Mine Sweeper";
-    </script>
-    <script type="text/javascript" src="../../scripts/timer.js"></script>
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
