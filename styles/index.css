@@ -31,3 +31,22 @@
     float: right;
     margin-bottom: 2rem
 }
+
+#statusBar{
+    font-weight: 400;
+    font-size: 2rem;
+}
+
+i{
+    font-size: 2em;
+    float: right;
+    color: gold;
+}
+
+.btn-primary{
+    margin-top: 6px;
+}
+
+.card-text{
+    margin-bottom: 10px;
+}
