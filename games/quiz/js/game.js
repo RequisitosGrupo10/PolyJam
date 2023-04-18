@@ -111,6 +111,7 @@ choices.forEach((choice) => {
         selectedChoice.parentElement.classList.add(classToApply);
 
         if (classToApply === 'incorrect') {
+            feedback.className += " my-3"
             feedback.innerHTML = "The correct answer was: " + currentQuestion['choice' + currentQuestion.answer];
         }
 
