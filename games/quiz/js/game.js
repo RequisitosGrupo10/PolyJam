@@ -115,11 +115,14 @@ choices.forEach((choice) => {
             feedback.innerHTML = "The correct answer was: " + currentQuestion['choice' + currentQuestion.answer];
         }
 
+        nextBtn.removeAttribute('disabled');
+        
         const clickOnNext = function nextQuestions(e) {
             selectedChoice.parentElement.classList.remove(classToApply);
             feedback.innerHTML = "";
             getNewQuestion();
-            nextBtn.removeEventListener('click', clickOnNext)
+            nextBtn.removeEventListener('click', clickOnNext);
+            nextBtn.setAttribute('disabled', 'true');
         }
 
         nextBtn.addEventListener('click', clickOnNext);
