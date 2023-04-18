@@ -73,6 +73,7 @@ getNewQuestion = () => {
     if (questionCounter >= MAX_QUESTIONS) {
         nextBtn.innerHTML = "End";
     }
+    console.log(questionCounter)
     progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
     //Update the progress bar
     progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
@@ -85,10 +86,12 @@ getNewQuestion = () => {
         const number = choice.dataset['number'];
         choice.innerHTML = currentQuestion['choice' + number];
     });
+    console.log(choices)
 
     availableQuesions.splice(questionIndex, 1);
     acceptingAnswers = true;
 };
+
 
 choices.forEach((choice) => {
     choice.addEventListener('click', (e) => {
@@ -111,11 +114,14 @@ choices.forEach((choice) => {
             feedback.innerHTML = "The correct answer was: " + currentQuestion['choice' + currentQuestion.answer];
         }
 
-        nextBtn.addEventListener('click', () => {
+        const clickOnNext = function nextQuestions(e) {
             selectedChoice.parentElement.classList.remove(classToApply);
             feedback.innerHTML = "";
             getNewQuestion();
-        });
+            nextBtn.removeEventListener('click', clickOnNext)
+        }
+
+        nextBtn.addEventListener('click', clickOnNext);
     });
 });
 
