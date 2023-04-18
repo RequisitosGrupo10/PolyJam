@@ -55,3 +55,28 @@ footer ul {
     gap: 2rem;
     list-style-type: none;
 }
+
+.tags{    
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    gap: 10px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #ddd;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin: 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }

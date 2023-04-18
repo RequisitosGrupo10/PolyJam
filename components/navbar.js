@@ -10,7 +10,8 @@ class Navbar extends HTMLElement {
       { url: "/", label: "Home" },
       { url: "/games/matchPairs/matchPairs.html", label: "Match Pairs" },
       { url: "/games/quiz/quiz.html", label: "Quiz" },
-      { url: "/games/minesweeper/minesweeper.html", label: "MineSweeper" }
+      { url: "/games/minesweeper/minesweeper.html", label: "MineSweeper" },
+      { url: "/account/times.html", label: "Times" }
     ];
     this.innerHTML = `
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
