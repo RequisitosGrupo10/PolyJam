@@ -34,7 +34,7 @@ searchInput.addEventListener("keypress", function (e) {
     }
 }, false);
 
-searchButton.addEventListener("click", function (e) {
+searchButton.addEventListener("click", function () {
     doSearch();
 }, false);
 
