@@ -73,7 +73,7 @@ getNewQuestion = () => {
     if (questionCounter >= MAX_QUESTIONS) {
         nextBtn.innerHTML = "End";
     }
-    console.log(questionCounter)
+    
     progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
     //Update the progress bar
     progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
@@ -86,7 +86,6 @@ getNewQuestion = () => {
         const number = choice.dataset['number'];
         choice.innerHTML = currentQuestion['choice' + number];
     });
-    console.log(choices)
 
     availableQuesions.splice(questionIndex, 1);
     acceptingAnswers = true;
@@ -114,11 +113,16 @@ choices.forEach((choice) => {
             feedback.innerHTML = "The correct answer was: " + currentQuestion['choice' + currentQuestion.answer];
         }
 
+        nextBtn.removeAttribute('disabled');
+        nextBtn.classList.toggle('btn-disabled');
+        
         const clickOnNext = function nextQuestions(e) {
             selectedChoice.parentElement.classList.remove(classToApply);
             feedback.innerHTML = "";
             getNewQuestion();
-            nextBtn.removeEventListener('click', clickOnNext)
+            nextBtn.removeEventListener('click', clickOnNext);
+            nextBtn.setAttribute('disabled', 'true');
+            nextBtn.classList.toggle('btn-disabled');
         }
 
         nextBtn.addEventListener('click', clickOnNext);
