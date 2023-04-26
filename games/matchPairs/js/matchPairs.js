@@ -159,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < cardArray.length; i++) {
       const card = document.createElement('img')
       card.setAttribute('src', 'js/images/blank.png')
+      card.setAttribute('alt', 'card number '+(i+1)+', value: blank');
       card.setAttribute('width', '200')
       card.setAttribute('height', '200')
       card.setAttribute('data-id', i)
@@ -175,18 +176,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (optionOneId == optionTwoId) {
       cards[optionOneId].setAttribute('src', 'js/images/blank.png')
+      cards[optionOneId].setAttribute('alt', 'card number '+(parseInt(optionOneId)+1)+', value: blank');
       cards[optionTwoId].setAttribute('src', 'js/images/blank.png')
+      cards[optionTwoId].setAttribute('alt', 'card number '+(parseInt(optionTwoId)+1)+', value: blank');
     }
     else if (cardsChosen[0] === cardsChosen[1]) {
       cards[optionOneId].setAttribute('src', 'js/images/white.png')
+      cards[optionOneId].setAttribute('alt', 'card number '+(parseInt(optionOneId)+1)+', value: white');
       cards[optionTwoId].setAttribute('src', 'js/images/white.png')
+      cards[optionTwoId].setAttribute('alt', 'card number '+(parseInt(optionTwoId)+1)+', value: white');
       cards[optionOneId].removeEventListener('click', flipCard)
       cards[optionTwoId].removeEventListener('click', flipCard)
       cardsWon.push(cardsChosen)
       resultDisplay.textContent = (resultDisplay.textContent == "" ? 0 : parseInt(resultDisplay.textContent)) + 5;
     } else {
       cards[optionOneId].setAttribute('src', 'js/images/blank.png')
+      cards[optionOneId].setAttribute('alt', 'card number '+(parseInt(optionOneId)+1)+', value: blank');
       cards[optionTwoId].setAttribute('src', 'js/images/blank.png')
+      cards[optionTwoId].setAttribute('alt', 'card number '+(parseInt(optionTwoId)+1)+', value: blank');
       //alert('Sorry, try again')
       resultDisplay.textContent = (resultDisplay.textContent == "" ? 0 : parseInt(resultDisplay.textContent)) - 1;
     }
@@ -213,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cardsChosen.push(cardArray[cardId].name)
     cardsChosenId.push(cardId)
     this.setAttribute('src', cardArray[cardId].img)
+    this.setAttribute('alt', 'card number '+(parseInt(cardId)+1)+', value: '+cardArray[cardId].name);
     if (cardsChosen.length === 2) {
       setTimeout(checkForMatch, 500)
     }
