@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         highScoresList.insertBefore(newItem, auxListItem);
       }
 
-      if (highScoresList.childElementCount >= 5) {
+      if (highScoresList.childElementCount >= 10) {
         highScoresList.removeChild(highScoresList.lastElementChild);
       }
     } else {
@@ -163,6 +163,11 @@ document.addEventListener('DOMContentLoaded', () => {
       card.setAttribute('width', '200')
       card.setAttribute('height', '200')
       card.setAttribute('data-id', i)
+      card.setAttribute('tabindex', '0');
+      card.addEventListener('keyup', e => {if (e.code === "Enter" || e.code == "Space") {
+        console.log('Space pressed');
+        card.click();
+       }});
       card.addEventListener('click', flipCard)
       grid.appendChild(card)
     }
@@ -202,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //resultDisplay.textContent = cardsWon.length
     if (cardsWon.length === cardArray.length / 2) {
       //Create a modal to store the high score
-      if (highScoresList.childElementCount < 5) {
+      if (highScoresList.childElementCount <= 10) {
         // Añadimos el highscore directamente
         highScoresModal.show();
       } else {
