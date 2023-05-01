@@ -2,10 +2,10 @@ load();
 
 function load() {
     const gameCatalog = document.getElementById("gameCatalog");
-    const games = gameCatalog.children;
+    const games = document.querySelectorAll('.card');
     for (let i = 0; i < games.length; i++) {
         const game = games[i];
-        const gameName = game.querySelector('.card-body h5.card-title').textContent;
+        const gameName = game.querySelector('.card-body h4.card-title').textContent;
         const gameStar = game.querySelector('.card-body i');
         const gameTuple = {key: gameName, element: gameStar};
         const favouriteValue = localStorage.getItem(gameName);
