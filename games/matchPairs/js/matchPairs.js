@@ -53,6 +53,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   cardArray.sort(() => 0.5 - Math.random())
 
+  const difficulty = document.getElementById("difficulty")
+  let tiempoEspera = 3000;
+  opcionCambiada = () => {
+    let index = difficulty.selectedIndex;
+    if(index == 0){
+      tiempoEspera = 3000;
+    }
+    if(index == 1){
+      tiempoEspera = 750;
+    }
+    if(index == 2){
+      tiempoEspera = 300;
+    }
+  };
+  difficulty.addEventListener("change", opcionCambiada);
+
   const grid = document.querySelector('#grid')
   const resultDisplay = document.querySelector('#result')
   let cardsChosen = []
@@ -141,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         highScoresList.insertBefore(newItem, auxListItem);
       }
 
-      if (highScoresList.childElementCount >= 5) {
+      if (highScoresList.childElementCount >= 10) {
         highScoresList.removeChild(highScoresList.lastElementChild);
       }
     } else {
@@ -159,9 +175,14 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < cardArray.length; i++) {
       const card = document.createElement('img')
       card.setAttribute('src', 'js/images/blank.png')
-      card.setAttribute('width', '200')
-      card.setAttribute('height', '200')
+      card.setAttribute('alt', 'card number '+(i+1)+', value: blank');
+      card.setAttribute('width', '175')
+      card.setAttribute('height', '175')
       card.setAttribute('data-id', i)
+      card.setAttribute('tabindex', '0');
+      card.addEventListener('keyup', e => {if (e.code === "Enter" || e.code == "Space") {
+        card.click();
+       }});
       card.addEventListener('click', flipCard)
       grid.appendChild(card)
     }
@@ -175,18 +196,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (optionOneId == optionTwoId) {
       cards[optionOneId].setAttribute('src', 'js/images/blank.png')
+      cards[optionOneId].setAttribute('alt', 'card number '+(parseInt(optionOneId)+1)+', value: blank');
       cards[optionTwoId].setAttribute('src', 'js/images/blank.png')
+      cards[optionTwoId].setAttribute('alt', 'card number '+(parseInt(optionTwoId)+1)+', value: blank');
     }
     else if (cardsChosen[0] === cardsChosen[1]) {
       cards[optionOneId].setAttribute('src', 'js/images/white.png')
+      cards[optionOneId].setAttribute('alt', 'card number '+(parseInt(optionOneId)+1)+', value: white');
       cards[optionTwoId].setAttribute('src', 'js/images/white.png')
+      cards[optionTwoId].setAttribute('alt', 'card number '+(parseInt(optionTwoId)+1)+', value: white');
       cards[optionOneId].removeEventListener('click', flipCard)
       cards[optionTwoId].removeEventListener('click', flipCard)
       cardsWon.push(cardsChosen)
       resultDisplay.textContent = (resultDisplay.textContent == "" ? 0 : parseInt(resultDisplay.textContent)) + 5;
     } else {
       cards[optionOneId].setAttribute('src', 'js/images/blank.png')
+      cards[optionOneId].setAttribute('alt', 'card number '+(parseInt(optionOneId)+1)+', value: blank');
       cards[optionTwoId].setAttribute('src', 'js/images/blank.png')
+      cards[optionTwoId].setAttribute('alt', 'card number '+(parseInt(optionTwoId)+1)+', value: blank');
       //alert('Sorry, try again')
       resultDisplay.textContent = (resultDisplay.textContent == "" ? 0 : parseInt(resultDisplay.textContent)) - 1;
     }
@@ -195,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //resultDisplay.textContent = cardsWon.length
     if (cardsWon.length === cardArray.length / 2) {
       //Create a modal to store the high score
-      if (highScoresList.childElementCount < 5) {
+      if (highScoresList.childElementCount <= 10) {
         // Añadimos el highscore directamente
         highScoresModal.show();
       } else {
@@ -213,8 +240,9 @@ document.addEventListener('DOMContentLoaded', () => {
     cardsChosen.push(cardArray[cardId].name)
     cardsChosenId.push(cardId)
     this.setAttribute('src', cardArray[cardId].img)
+    this.setAttribute('alt', 'card number '+(parseInt(cardId)+1)+', value: '+cardArray[cardId].name);
     if (cardsChosen.length === 2) {
-      setTimeout(checkForMatch, 500)
+      setTimeout(checkForMatch, tiempoEspera)
     }
   }
 

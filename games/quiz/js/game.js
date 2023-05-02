@@ -91,42 +91,53 @@ getNewQuestion = () => {
     acceptingAnswers = true;
 };
 
+function selectChoice (e) {
+    if (!acceptingAnswers) return;
+    console.log("Acepta");
+    acceptingAnswers = false;
+    const selectedChoice = e.target;
+    const selectedAnswer = selectedChoice.dataset['number'];
+
+    const classToApply =
+        selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect';
+
+    if (classToApply === 'correct') {
+        incrementScore(CORRECT_BONUS);
+    }
+
+    selectedChoice.parentElement.classList.add(classToApply);
+
+    if (classToApply === 'incorrect') {
+        feedback.innerHTML = "The correct answer was: " + currentQuestion['choice' + currentQuestion.answer];
+    }
+
+    nextBtn.removeAttribute('disabled');
+    nextBtn.classList.toggle('btn-disabled');
+    
+    const clickOnNext = function nextQuestions(e) {
+        selectedChoice.parentElement.classList.remove(classToApply);
+        feedback.innerHTML = "";
+        getNewQuestion();
+        nextBtn.removeEventListener('click', clickOnNext);
+        nextBtn.removeEventListener('keypress', clickOnNext);
+        nextBtn.setAttribute('disabled', 'true');
+        nextBtn.classList.toggle('btn-disabled');
+    }
+
+    nextBtn.addEventListener('click', clickOnNext);
+    nextBtn.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter')
+            clickOnNext(e);
+    });
+}
+
 
 choices.forEach((choice) => {
-    choice.addEventListener('click', (e) => {
-        if (!acceptingAnswers) return;
-
-        acceptingAnswers = false;
-        const selectedChoice = e.target;
-        const selectedAnswer = selectedChoice.dataset['number'];
-
-        const classToApply =
-            selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect';
-
-        if (classToApply === 'correct') {
-            incrementScore(CORRECT_BONUS);
+    choice.addEventListener('click', selectChoice);
+    choice.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter'){
+            selectChoice(e);
         }
-
-        selectedChoice.parentElement.classList.add(classToApply);
-
-        if (classToApply === 'incorrect') {
-            feedback.className += " my-3"
-            feedback.innerHTML = "The correct answer was: " + currentQuestion['choice' + currentQuestion.answer];
-        }
-
-        nextBtn.removeAttribute('disabled');
-        nextBtn.classList.toggle('btn-disabled');
-        
-        const clickOnNext = function nextQuestions(e) {
-            selectedChoice.parentElement.classList.remove(classToApply);
-            feedback.innerHTML = "";
-            getNewQuestion();
-            nextBtn.removeEventListener('click', clickOnNext);
-            nextBtn.setAttribute('disabled', 'true');
-            nextBtn.classList.toggle('btn-disabled');
-        }
-
-        nextBtn.addEventListener('click', clickOnNext);
     });
 });
 
