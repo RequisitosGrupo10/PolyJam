@@ -160,12 +160,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.createElement('img')
       card.setAttribute('src', 'js/images/blank.png')
       card.setAttribute('alt', 'card number '+(i+1)+', value: blank');
-      card.setAttribute('width', '200')
-      card.setAttribute('height', '200')
+      card.setAttribute('width', '175')
+      card.setAttribute('height', '175')
       card.setAttribute('data-id', i)
       card.setAttribute('tabindex', '0');
       card.addEventListener('keyup', e => {if (e.code === "Enter" || e.code == "Space") {
-        console.log('Space pressed');
         card.click();
        }});
       card.addEventListener('click', flipCard)
