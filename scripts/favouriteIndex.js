@@ -2,7 +2,7 @@ load();
 
 function load() {
     const gameCatalog = document.getElementById("gameCatalog");
-    const games = document.querySelectorAll('.card');
+    const games = gameCatalog.children;
     for (let i = 0; i < games.length; i++) {
         const game = games[i];
         const gameName = game.querySelector('.card-body h4.card-title').textContent;
