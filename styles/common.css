@@ -88,3 +88,7 @@ footer ul {
     color: white;
     text-decoration: underline;
 }
+
+.w-85 {
+    width: 85%!important;
+}
