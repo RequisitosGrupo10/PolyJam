@@ -80,3 +80,15 @@ footer ul {
     text-transform: uppercase;
     cursor: pointer;
   }
+
+.nav-link{
+    color: white;
+}
+.active{
+    color: white;
+    text-decoration: underline;
+}
+
+.w-85 {
+    width: 85%!important;
+}

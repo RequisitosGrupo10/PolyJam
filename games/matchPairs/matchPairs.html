@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <title class="title">PolyJam - Match Pairs</title>
@@ -54,8 +54,7 @@
       </div>
     </div>
   </nav>
-  <div class="w-75 mx-auto container-fluid bg-light" id="wrapper">
-    <section>
+  <div class="w-85 mx-auto container-fluid bg-light m-0" id="wrapper">
       <!--game Windows-->
       <div class="card text-center my-2">
         <header class="card-header" id="gameTitle"><h1>Match Pairs</h1></header>
@@ -65,6 +64,15 @@
             <div><h2>Play!</h2></div>
             <h3>Score: <span id="result"></span></h3>
             <div id="grid" class="container-fluid"></div>
+            <br>
+            <form>
+              <label for="difficulty">Choose a difficulty:</label>
+              <select id="difficulty" name="difficulty">
+                <option selected>Easy</option>
+                <option>Medium</option>
+                <option>Difficult</option>
+              </select>
+            </form>
           </section>
         </div>
         <div class="cart-footer tags">
@@ -74,24 +82,16 @@
         <div class="card-footer text-muted updatedTimestamp">updated 22/03/2023</div>
       </div>
 
-      <!--Game Description-->
-      <section id="generalDescription" class="card">
+      <!--Game Instructions-->
+      <section id="instructions" class="card">
         <div class="card-body">
-          <h4 class="card-title text-center">MATCH PAIRS</h4>
-
+          <h4 class="card-title text-center">Instructions</h4>
           <article id="description" class="title">
             <p class="card-text help_text">
               <strong>Objective</strong>: Get all the pairs with the minimum
               number of tries.<br />
             </p>
           </article>
-        </div>
-      </section>
-
-      <!--Game Instructions-->
-      <section id="instructions" class="card">
-        <div class="card-body">
-          <h4 class="card-title text-center">MATCH PAIRS - Instructions</h4>
           <p class="card-text help_text">
             A set of cards presented upside-down will be displayed on the
             screen. They can be flipped by clicking on them with the
@@ -108,7 +108,7 @@
       <!--High scores-->
       <section id="highScores" class="card">
         <div class="card-body">
-          <h4 class="card-title text-center">MATCH PAIRS - High scores</h4>
+          <h4 class="card-title text-center">High scores</h4>
           <div class="align-content-center">
             <ol id="highscoresList">
             </ol>
@@ -142,7 +142,6 @@
 
       <!--Comments-->
       <custom-comment-section></custom-comment-section>
-    </section>
   </div>
   <custom-footer></custom-footer>
   <script type="text/javascript" src="../../components/comments.js"></script>
