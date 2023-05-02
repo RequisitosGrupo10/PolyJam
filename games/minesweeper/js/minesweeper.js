@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 highScoresList.insertBefore(newItem, auxListItem);
             }
 
-            if (highScoresList.childElementCount >= 5) {
+            if (highScoresList.childElementCount >= 10) {
                 highScoresList.removeChild(highScoresList.lastElementChild);
             }
         } else {
@@ -192,6 +192,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 let img = document.createElement('img');
                 cell.appendChild(img);
                 changeImage(cell, 11);
+                cell.setAttribute('tabindex', '0');
+                cell.onkeydown = function (e) {
+                    if (e.key === "Enter" || e.key == " ") {
+                        if (this.firstChild.getAttribute('name') == 'flag' || this.firstChild.getAttribute('name') == 'question') return false;
+                        clickCell(this);
+                    }
+                };
                 cell.onclick = function () {
                     if (this.firstChild.getAttribute('name') == 'flag' || this.firstChild.getAttribute('name') == 'question') return false;
                     clickCell(this);
@@ -218,11 +225,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function changeImage(cell, numberAray) {
+        let cellRow = cell.parentNode.rowIndex + 1;
+        let cellCol = cell.cellIndex + 1;
         let image = cell.firstChild;
         //console.log(image);
         cell.setAttribute('class', 'p-0 m-0');
         image.setAttribute('src', cardArray[numberAray].img);
         image.setAttribute('name', cardArray[numberAray].name);
+        let alternative = 'row ' + cellRow + ', column ' + cellCol + ', value: ' + cardArray[numberAray].name + '.';
+        console.log(alternative);
+        image.setAttribute('alt', alternative);
         image.setAttribute('height', '60');
         image.setAttribute('width', '60');
     }
@@ -283,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timesClicked = 0;
 
             //Create a modal to store the high score
-            if (highScoresList.childElementCount < 5) {
+            if (highScoresList.childElementCount <= 10) {
                 // Añadimos el highscore directamente
                 highScoresModal.show();
             } else {
