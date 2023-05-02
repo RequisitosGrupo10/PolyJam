@@ -53,6 +53,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   cardArray.sort(() => 0.5 - Math.random())
 
+  const difficulty = document.getElementById("difficulty")
+  let tiempoEspera = 3000;
+  opcionCambiada = () => {
+    let index = difficulty.selectedIndex;
+    if(index == 0){
+      tiempoEspera = 3000;
+    }
+    if(index == 1){
+      tiempoEspera = 750;
+    }
+    if(index == 2){
+      tiempoEspera = 300;
+    }
+  };
+  difficulty.addEventListener("change", opcionCambiada);
+
   const grid = document.querySelector('#grid')
   const resultDisplay = document.querySelector('#result')
   let cardsChosen = []
@@ -226,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     this.setAttribute('src', cardArray[cardId].img)
     this.setAttribute('alt', 'card number '+(parseInt(cardId)+1)+', value: '+cardArray[cardId].name);
     if (cardsChosen.length === 2) {
-      setTimeout(checkForMatch, 500)
+      setTimeout(checkForMatch, tiempoEspera)
     }
   }
 
