@@ -20,7 +20,7 @@ function doSearch(searchValue) {
 
     for (let i = 0; i < games.length; i++) {
         const game = games[i];
-        const gameName = game.querySelector('.card-body h4.card-title').textContent;
+        const gameName = game.querySelector('.card-body h3.card-title').textContent;
         if (localStorage.getItem(gameName) == 'true') {
             favouriteGames.push(game);
         }

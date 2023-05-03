@@ -19,7 +19,7 @@ function doSearch(searchValue) {
     //const games = gameCatalog.firstChild.children;
     for (let i = 0; i < games.length; i++) {
         const game = games[i];
-        const gameName = game.querySelector('.card-body h4.card-title').textContent;
+        const gameName = game.querySelector('.card-body h3.card-title').textContent;
         const gameTags = game.querySelectorAll('.tags > span');
         const tags = Array.from(gameTags).map(span => span.textContent.toLowerCase());
         if (gameName.toLowerCase().includes(searchValue.toLowerCase()) || searchValue === "" || tags.includes( (searchValue.toLowerCase()) ) ) {
