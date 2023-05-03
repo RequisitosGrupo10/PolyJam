@@ -28,7 +28,7 @@ function doSearch(searchValue) {
 
     for (let i = 0; i < favouriteGames.length; i++) {
         const game = favouriteGames[i];
-        const gameName = game.querySelector('.card-body h4.card-title').textContent;
+        const gameName = game.querySelector('.card-body h3.card-title').textContent;
         const gameTags = game.querySelectorAll('.tags > span');
         const tags = Array.from(gameTags).map(span => span.textContent.toLowerCase());
         if (gameName.toLowerCase().includes(searchValue.toLowerCase()) || searchValue === "" || tags.includes( (searchValue.toLowerCase()) ) ) {

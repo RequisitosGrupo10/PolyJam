@@ -8,20 +8,17 @@
     font-family: system-ui;
 }
 
-html {
+html, body {
     height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
-    height: 100%;
     display: flex;
     flex-direction: column;
     background-color: white;
-}
-
-section {
-    padding: 2rem;
 }
 
 nav {
@@ -91,4 +88,8 @@ footer ul {
 
 .w-85 {
     width: 85%!important;
+}
+
+.lh-0{
+    line-height: 0;
 }

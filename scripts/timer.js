@@ -1,6 +1,6 @@
 const timePlayed = localStorage.getItem("timePlayed");
 if (timePlayed === null) {
-    const initialTimes = {"Match Pairs": 15000, "Mine Sweeper": 25000}
+    const initialTimes = {};
     const jsoned = JSON.stringify(initialTimes);
     localStorage.setItem("timePlayed", jsoned);
 }
