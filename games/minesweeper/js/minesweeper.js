@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.innerHTML = "";
         for (let i = 0; i < 10; i++) {
             row = grid.insertRow(i);
-            row.setAttribute('class', 'p-0 m-0');
+            row.setAttribute('class', 'p-0 m-0 d-block');
             for (let j = 0; j < 10; j++) {
                 cell = row.insertCell(j);
                 cell.setAttribute('class', 'p-0 m-0');
@@ -228,15 +228,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let cellRow = cell.parentNode.rowIndex + 1;
         let cellCol = cell.cellIndex + 1;
         let image = cell.firstChild;
-        //console.log(image);
-        cell.setAttribute('class', 'p-0 m-0');
+        cell.setAttribute('class', 'p-0 m-0 lh-0');
         image.setAttribute('src', cardArray[numberAray].img);
         image.setAttribute('name', cardArray[numberAray].name);
         let alternative = 'row ' + cellRow + ', column ' + cellCol + ', value: ' + cardArray[numberAray].name + '.';
         console.log(alternative);
         image.setAttribute('alt', alternative);
-        image.setAttribute('height', '60');
-        image.setAttribute('width', '60');
+        image.style.height = '7vw';
+        image.style.width = '7vw';
     }
 
     function addMines() {
