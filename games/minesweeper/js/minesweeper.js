@@ -236,7 +236,6 @@ document.addEventListener('DOMContentLoaded', () => {
         image.setAttribute('alt', alternative);
         image.style.height = '7vw';
         image.style.width = '7vw';
-
     }
 
     function addMines() {
