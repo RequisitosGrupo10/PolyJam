@@ -1,0 +1,21 @@
+{
+  "name": "polyjam",
+  "version": "1.0.0",
+  "description": "A webpage for accesible games while learning Frontend.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RequisitosGrupo10/PolyJam.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RequisitosGrupo10/PolyJam/issues"
+  },
+  "homepage": "https://github.com/RequisitosGrupo10/PolyJam#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.33.0"
+  }
+}
