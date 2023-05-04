@@ -58,13 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
   opcionCambiada = () => {
     let index = difficulty.selectedIndex;
     if(index == 0){
-      tiempoEspera = 3000;
+      tiempoEspera = 5000;
     }
     if(index == 1){
-      tiempoEspera = 750;
+      tiempoEspera = 1000;
     }
     if(index == 2){
-      tiempoEspera = 300;
+      tiempoEspera = 500;
     }
   };
   difficulty.addEventListener("change", opcionCambiada);
