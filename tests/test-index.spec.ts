@@ -15,7 +15,7 @@ test('should allow me to add todo items', async ({ page }) => {
 
 // Filtering locators feature
 test('navbar should have next links: Home, Favourite Games, Match Pairs, Quick Quiz, Minesweeper, Times', async ({ page }) => {
-  await expect (page
+  await expect(page
     .getByRole('listitem')
     .filter({ has: page.getByRole('link') }))
     .toHaveText(['Home', 'Favourite Games', 'Match Pairs', 'Quick Quiz', 'Minesweeper', 'Times']);
@@ -31,20 +31,20 @@ test('seach label is invisible', async ({ page }) => {
 test('All tags has class "selectable"', async ({ page }) => {
   const spans = await page.$$('span.tag');
   for (const span of spans) {
-      const cl = await span.getAttribute('class');
-      if(cl != null && !cl.split(" ").includes("visually-hidden")) {
-          expect(await span.getAttribute('class')).toContain('selectable');
+    const cl = await span.getAttribute('class');
+    if (cl != null && !cl.split(" ").includes("visually-hidden")) {
+      expect(await span.getAttribute('class')).toContain('selectable');
     }
   };
 });
 
 // To have attribute feature
-test ('All images on index has alternative text', async ({ page }) => {
+test('All images on index has alternative text', async ({ page }) => {
   const images = await page.locator('img').all();
   for (const image of images) {
     const reg = RegExp('^(?!\\s*$).+')
-    await expect(image).toHaveAttribute('alt',reg);
-  }  
+    await expect(image).toHaveAttribute('alt', reg);
+  }
 });
 
 // to have title feature
@@ -66,7 +66,7 @@ test('Index has header of level 2 with correct content', async ({ page }) => {
   await expect(headers[0]).toHaveText('Here you can find all of the games of our website. Enjoy!');
 });
 
-test ('Each card has header of level 3', async ({ page }) => {
+test('Each card has header of level 3', async ({ page }) => {
   const cards = await page.locator('div.card').all();
   for (const card of cards) {
     const headers = await card.locator('h3').all();
@@ -74,7 +74,7 @@ test ('Each card has header of level 3', async ({ page }) => {
   }
 });
 
-test ('Index page has empty satus bar', async ({ page }) => {
+test('Index page has empty satus bar', async ({ page }) => {
   const statusBar = await page.locator('p#statusBar');
   await expect(statusBar).toHaveText('');
 });
@@ -82,7 +82,7 @@ test ('Index page has empty satus bar', async ({ page }) => {
 
 test('Search action show correct status with enter key', async ({ page }) => {
   const searchBar = await page.getByPlaceholder("Search");
-  expect(searchBar).not.toBeNull();  
+  expect(searchBar).not.toBeNull();
   await searchBar.click();
   await searchBar.fill('someSearch');
   await searchBar.press('Enter');
@@ -118,13 +118,13 @@ test('Click on tag shows correct status', async ({ page }) => {
 
 test('Click on tag shows only games that contais that tag', async ({ page }) => {
   const tags = await page.locator('span.tag').all();
-  if(tags.length > 0){
+  if (tags.length > 0) {
     let found = false;
     let tag;
-    while(!found){
+    while (!found) {
       tag = tags[Math.floor(Math.random() * tags.length)];
       const cl = await tag.getAttribute('class');
-      if(tag != null && !(cl.split(" ").includes("visually-hidden"))){
+      if (tag != null && !(cl.split(" ").includes("visually-hidden"))) {
         found = true;
       }
     }
@@ -134,17 +134,17 @@ test('Click on tag shows only games that contais that tag', async ({ page }) => 
     for (const card of cards) {
       const style = await card.getAttribute('style');
       const allTags = await card.locator('span.tag').all();
-      if(style != null && style.includes("display: none !important")){
-        for(const atag of allTags){
+      if (style != null && style.includes("display: none !important")) {
+        for (const atag of allTags) {
           expect(await atag.innerText()).not.toBe(tagText);
         }
-      } else{
-          let found = false;
-          for(const atag of allTags){
-            if(await atag.innerText() == tagText){
-              found = true;
-            }
+      } else {
+        let found = false;
+        for (const atag of allTags) {
+          if (await atag.innerText() == tagText) {
+            found = true;
           }
+        }
         expect(found).toBe(true);
       }
     }
@@ -152,76 +152,76 @@ test('Click on tag shows only games that contais that tag', async ({ page }) => 
 });
 
 test.describe('Favourite', () => {
-  test('Adding a game to favourites', async ({page}) => {
-      const biStarIconList = await page.$$('i.bi-star');
-      const games = await page.$$('h3.card-title');
-      var cnt = 0;
-      for (const biStarIcon of biStarIconList) {
-          if (biStarIcon != null) {
-              //Testing it the icon toggles correctly from bi-star to bi-star-fill
-              const classAttribute = await biStarIcon.getAttribute('class');
-              const isStarred = classAttribute?.includes('bi-star-fill') ?? false;
-              await biStarIcon.click();
-      
-              const updatedClassAttribute = await biStarIcon.getAttribute('class');
-              const isStarredAfterClick = updatedClassAttribute?.includes('bi-star-fill') ?? false;
+  test('Adding a game to favourites', async ({ page }) => {
+    const biStarIconList = await page.$$('i.bi-star');
+    const games = await page.$$('h3.card-title');
+    var cnt = 0;
+    for (const biStarIcon of biStarIconList) {
+      if (biStarIcon != null) {
+        //Testing it the icon toggles correctly from bi-star to bi-star-fill
+        const classAttribute = await biStarIcon.getAttribute('class');
+        const isStarred = classAttribute?.includes('bi-star-fill') ?? false;
+        await biStarIcon.click();
 
-              expect(isStarredAfterClick).toBe(!isStarred);
-      
-              //Testing if it updates value from false to true in localStorage
-              const h3Text = await games[cnt].textContent();
-              if (h3Text != null) {
-                  const isStarredInLocalStorage = await page.evaluate((key) => {
-                      return window.localStorage.getItem(key);
-                  }, h3Text);
+        const updatedClassAttribute = await biStarIcon.getAttribute('class');
+        const isStarredAfterClick = updatedClassAttribute?.includes('bi-star-fill') ?? false;
 
-                  expect(isStarredInLocalStorage).toBe(isStarredAfterClick.toString());
-              } else {
-                  expect(false).toBe(true);
-              }
-          } else {
-              expect(false).toBe(true);
-          }
-          cnt++;
+        expect(isStarredAfterClick).toBe(!isStarred);
+
+        //Testing if it updates value from false to true in localStorage
+        const h3Text = await games[cnt].textContent();
+        if (h3Text != null) {
+          const isStarredInLocalStorage = await page.evaluate((key) => {
+            return window.localStorage.getItem(key);
+          }, h3Text);
+
+          expect(isStarredInLocalStorage).toBe(isStarredAfterClick.toString());
+        } else {
+          expect(false).toBe(true);
+        }
+      } else {
+        expect(false).toBe(true);
       }
+      cnt++;
+    }
   });
 
-  test('Removing a game from favourites', async ({page}) => {
-      const biStarIconList = await page.$$('i.bi-star');
-      //Toggling all icons from bi-star to bi-star-fill
-      for (const biStarIcon of biStarIconList) {
-          await biStarIcon.click();
+  test('Removing a game from favourites', async ({ page }) => {
+    const biStarIconList = await page.$$('i.bi-star');
+    //Toggling all icons from bi-star to bi-star-fill
+    for (const biStarIcon of biStarIconList) {
+      await biStarIcon.click();
+    }
+    const biStarFillIconList = await page.$$('i.bi-star-fill');
+    const games = await page.$$('h3.card-title');
+    var cnt = 0;
+    for (const biStarFillIcon of biStarFillIconList) {
+      if (biStarFillIcon != null) {
+        //Testing it the icon toggles correctly from bi-star-fill to bi-star
+        const classAttribute = await biStarFillIcon.getAttribute('class');
+        const isStarred = classAttribute?.includes('bi-star-fill') ?? false;
+        await biStarFillIcon.click();
+
+        const updatedClassAttribute = await biStarFillIcon.getAttribute('class');
+        const isStarredAfterClick = updatedClassAttribute?.includes('bi-star-fill') ?? false;
+
+        expect(isStarredAfterClick).toBe(!isStarred);
+
+        //Testing if it updates value from true to false in localStorage
+        const h3Text = await games[cnt].textContent();
+        if (h3Text != null) {
+          const isNotStarredInLocalStorage = await page.evaluate((key) => {
+            return window.localStorage.getItem(key);
+          }, h3Text);
+
+          expect(isNotStarredInLocalStorage).toBe(isStarredAfterClick.toString());
+        } else {
+          expect(false).toBe(true);
+        }
+      } else {
+        expect(false).toBe(true);
       }
-      const biStarFillIconList = await page.$$('i.bi-star-fill');
-      const games = await page.$$('h3.card-title');
-      var cnt = 0;
-      for (const biStarFillIcon of biStarFillIconList) {
-          if (biStarFillIcon != null) {
-              //Testing it the icon toggles correctly from bi-star-fill to bi-star
-              const classAttribute = await biStarFillIcon.getAttribute('class');
-              const isStarred = classAttribute?.includes('bi-star-fill') ?? false;
-              await biStarFillIcon.click();
-    
-              const updatedClassAttribute = await biStarFillIcon.getAttribute('class');
-              const isStarredAfterClick = updatedClassAttribute?.includes('bi-star-fill') ?? false;
-
-              expect(isStarredAfterClick).toBe(!isStarred);
-
-              //Testing if it updates value from true to false in localStorage
-              const h3Text = await games[cnt].textContent();
-              if (h3Text != null) {
-                  const isNotStarredInLocalStorage = await page.evaluate((key) => {
-                      return window.localStorage.getItem(key);
-                  }, h3Text);
-
-                  expect(isNotStarredInLocalStorage).toBe(isStarredAfterClick.toString());
-              } else {
-                  expect(false).toBe(true);
-              }
-          } else {
-              expect(false).toBe(true);
-          }
-          cnt++;
-      }
+      cnt++;
+    }
   });
 });
