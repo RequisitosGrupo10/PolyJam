@@ -9,6 +9,9 @@ const game = document.getElementById('game');
 const nextBtn = document.getElementById('next')
 const feedback = document.getElementById('feedback');
 
+
+let selectedChoice;
+let canContinue = false;
 let currentQuestion = {};
 let acceptingAnswers = false;
 let score = 0;
@@ -63,7 +66,7 @@ startGame = () => {
     loader.classList.add('hidden');
 };
 
-getNewQuestion = () => {
+function getNewQuestion()  {
     if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score);
         //go to the end page
@@ -91,11 +94,20 @@ getNewQuestion = () => {
     acceptingAnswers = true;
 };
 
+function nextQuestions(e){
+    if (!canContinue) return;
+
+    feedback.innerHTML = "";
+    getNewQuestion();
+    nextBtn.setAttribute('disabled', 'true');
+    nextBtn.classList.toggle('btn-disabled');
+    canContinue = false;
+}
+
 function selectChoice (e) {
     if (!acceptingAnswers) return;
-    console.log("Acepta");
     acceptingAnswers = false;
-    const selectedChoice = e.target;
+    selectedChoice = e.target;
     const selectedAnswer = selectedChoice.dataset['number'];
 
     const classToApply =
@@ -113,31 +125,22 @@ function selectChoice (e) {
 
     nextBtn.removeAttribute('disabled');
     nextBtn.classList.toggle('btn-disabled');
-    
-    const clickOnNext = function nextQuestions(e) {
-        selectedChoice.parentElement.classList.remove(classToApply);
-        feedback.innerHTML = "";
-        getNewQuestion();
-        nextBtn.removeEventListener('click', clickOnNext);
-        nextBtn.removeEventListener('keypress', clickOnNext);
-        nextBtn.setAttribute('disabled', 'true');
-        nextBtn.classList.toggle('btn-disabled');
-    }
-
-    nextBtn.addEventListener('click', clickOnNext);
-    nextBtn.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter')
-            clickOnNext(e);
-    });
+    selectedChoice.parentElement.classList.remove(classToApply);
+    canContinue = true;
 }
 
 
+nextBtn.addEventListener('click', nextQuestions);
+nextBtn.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter')
+    nextQuestions(e);
+});
+
 choices.forEach((choice) => {
-    choice.addEventListener('click', selectChoice);
+choice.addEventListener('click', selectChoice);
     choice.addEventListener('keypress', (e) => {
-        if(e.key === 'Enter'){
-            selectChoice(e);
-        }
+        if(e.key === 'Enter')
+        selectChoice(e);
     });
 });
 
