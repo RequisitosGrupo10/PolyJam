@@ -96,7 +96,8 @@ function getNewQuestion()  {
 
 function nextQuestions(e){
     if (!canContinue) return;
-
+    selectedChoice.classList.remove('correct');
+    selectedChoice.classList.remove('incorrect');
     feedback.innerHTML = "";
     getNewQuestion();
     nextBtn.setAttribute('disabled', 'true');
@@ -117,7 +118,7 @@ function selectChoice (e) {
         incrementScore(CORRECT_BONUS);
     }
 
-    selectedChoice.parentElement.classList.add(classToApply);
+    selectedChoice.classList.add(classToApply);
 
     if (classToApply === 'incorrect') {
         feedback.innerHTML = "The correct answer was: " + currentQuestion['choice' + currentQuestion.answer];
