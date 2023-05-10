@@ -99,6 +99,7 @@ function nextQuestions(e){
     selectedChoice.classList.remove('correct');
     selectedChoice.classList.remove('incorrect');
     feedback.innerHTML = "";
+    feedback.removeAttribute('tabindex');
     getNewQuestion();
     nextBtn.setAttribute('disabled', 'true');
     nextBtn.classList.toggle('btn-disabled');
@@ -116,13 +117,15 @@ function selectChoice (e) {
 
     if (classToApply === 'correct') {
         incrementScore(CORRECT_BONUS);
+        feedback.innerHTML = "CORRECT";
     }
 
     selectedChoice.classList.add(classToApply);
 
     if (classToApply === 'incorrect') {
-        feedback.innerHTML = "The correct answer was: " + currentQuestion['choice' + currentQuestion.answer];
+        feedback.innerHTML = "INCORRECT: The correct answer was: " + currentQuestion['choice' + currentQuestion.answer];
     }
+    feedback.setAttribute('tabindex', 5);
 
     nextBtn.removeAttribute('disabled');
     nextBtn.classList.toggle('btn-disabled');
