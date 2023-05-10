@@ -22,7 +22,7 @@ test('navbar should have next links: Home, Favourite Games, Match Pairs, Quick Q
 });
 
 // To be visible
-test('seach label is invisible', async ({ page }) => {
+test('search label is invisible', async ({ page }) => {
   const searchLabel = await page.getByLabel('searchInput');
   expect(await searchLabel.isVisible()).toBe(false);
 });
