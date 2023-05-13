@@ -62,10 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
     switch (index) {
       case 0:
         tiempoEspera = 5000;
+        break;
       case 1:
         tiempoEspera = 1000;
+        break;
       case 2:
         tiempoEspera = 500;
+        break;
       default:
         break;
     }
