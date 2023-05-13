@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saveHighscoreButton.addEventListener("click", function () { saveHighscore() });
 
     function updateHighScoresList(userName, score) {
-        if (userName != "") {//&& score != ""
+        if (userName != "") {
 
             addNewScore(userName, score);
 
@@ -174,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     generateGrid();
     loadFromLocalStorage();
-    //localStorage.clear(); 
 
     function generateGrid() {
 
@@ -286,7 +285,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         if (levelComplete) {
-            //alert("You Win!");
             revealMines();
             timesClicked = 0;
 
@@ -323,15 +321,17 @@ document.addEventListener('DOMContentLoaded', () => {
             timesClicked = 0;
             revealMines();
             resultDisplay.textContent += " You lost.";
-            //alert("Game Over");
+            for (let i = 0; i <= 9; i++) {
+                for (let j = 0; j <= 9; j++) {
+                    grid.rows[i].cells[j].onclick = null;
+                }
+            }
         } else {
             timesClicked++;
-            //cell.className = "clicked";
             //Count and display the number of adjacent mines
             let mineCount = 0;
             let cellRow = cell.parentNode.rowIndex;
             let cellCol = cell.cellIndex;
-            //alert(cellRow + " " + cellCol);
             for (let i = Math.max(cellRow - 1, 0); i <= Math.min(cellRow + 1, 9); i++) {
                 for (let j = Math.max(cellCol - 1, 0); j <= Math.min(cellCol + 1, 9); j++) {
                     if (grid.rows[i].cells[j].getAttribute("data-mine") == "true") mineCount++;
@@ -354,7 +354,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             } else {
-                //cell.innerHTML = mineCount;
                 changeImage(cell, mineCount);
 
                 if (mineCount == 0) {
