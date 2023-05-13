@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  let canFlipCard = true;
+
   //card options
   const cardArray = [
     {
@@ -215,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
       //alert('Sorry, try again')
       resultDisplay.textContent = (resultDisplay.textContent == "" ? 0 : parseInt(resultDisplay.textContent)) - 1;
     }
+    canFlipCard = true
     cardsChosen = []
     cardsChosenId = []
     //resultDisplay.textContent = cardsWon.length
@@ -234,12 +237,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //flip your card
   function flipCard() {
+    if (!canFlipCard) return;
     let cardId = this.getAttribute('data-id')
     cardsChosen.push(cardArray[cardId].name)
     cardsChosenId.push(cardId)
     this.setAttribute('src', cardArray[cardId].img)
     this.setAttribute('alt', 'card number '+(parseInt(cardId)+1)+', value: '+cardArray[cardId].name);
     if (cardsChosen.length === 2) {
+      canFlipCard = false;
       setTimeout(checkForMatch, tiempoEspera)
     }
   }
