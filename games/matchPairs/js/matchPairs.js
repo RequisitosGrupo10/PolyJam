@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let cardsWon = []
 
   const highScoresModal = new bootstrap.Modal(document.getElementById('highScoresModal'));
-  let highScoresList = document.getElementById('highscoresList');
+  let highScoreDiv = document.getElementById('highScoresDiv');
   const saveHighscoreButton = document.getElementById('saveHighscore');
   saveHighscoreButton.addEventListener("click", function () { saveHighscore() });
 
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
       addNewScore(userName, score);
 
       //Local storage update
-      auxListItem = highScoresList.firstElementChild;
+      auxListItem = highScoreDiv.firstElementChild.firstElementChild;
       let actualHighScores = [];
       while (auxListItem != null) {
         nombre = auxListItem.firstElementChild.textContent;
@@ -109,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function loadFromLocalStorage() {
     if (localStorage.getItem("matchPairsHighScores") != null) {
       actualHighScores = JSON.parse(localStorage.getItem('matchPairsHighScores'));
-      //console.log(actualHighScores);
       size = actualHighScores.length;
       for (i = 0; i < size; i++) {
         //Creo nuevo nodo
@@ -123,6 +122,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addNewScore(name, score) {
+    
+    let highScoresList = highScoreDiv.firstElementChild;
+
+    if (highScoresList == null){
+      let newList = document.createElement("ol");
+      highScoreDiv.appendChild(newList);
+      highScoresList = highScoreDiv.firstElementChild;
+    }
 
     score = parseInt(score);
 
@@ -161,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
         highScoresList.removeChild(highScoresList.lastElementChild);
       }
     } else {
-
       highScoresList.appendChild(newItem);
     }
   }
@@ -222,11 +228,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //resultDisplay.textContent = cardsWon.length
     if (cardsWon.length === cardArray.length / 2) {
       //Create a modal to store the high score
-      if (highScoresList.childElementCount <= 10) {
+      if (highScoreDiv.childElementCount <= 10) {
         // Añadimos el highscore directamente
         highScoresModal.show();
       } else {
-        if (parseInt(resultDisplay.textContent) > highScoresList.lastElementChild.firstElementChild.firstElementChild) {
+        if (parseInt(resultDisplay.textContent) > highScoreDiv.lastElementChild.firstElementChild.firstElementChild) {
           highScoresModal.show();
         }
       }
