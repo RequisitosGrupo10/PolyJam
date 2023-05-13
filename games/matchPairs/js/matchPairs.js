@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  let canFlipCard = true;
+
   //card options
   const cardArray = [
     {
@@ -54,21 +56,25 @@ document.addEventListener('DOMContentLoaded', () => {
   cardArray.sort(() => 0.5 - Math.random())
 
   const difficulty = document.getElementById("difficulty")
-  let tiempoEspera = 3000;
+  let tiempoEspera = 5000;
   opcionCambiada = () => {
     let index = difficulty.selectedIndex;
-    if(index == 0){
-      tiempoEspera = 5000;
-    }
-    if(index == 1){
-      tiempoEspera = 1000;
-    }
-    if(index == 2){
-      tiempoEspera = 500;
+    switch (index) {
+      case 0:
+        tiempoEspera = 5000;
+        break;
+      case 1:
+        tiempoEspera = 1000;
+        break;
+      case 2:
+        tiempoEspera = 500;
+        break;
+      default:
+        break;
     }
   };
   difficulty.addEventListener("change", opcionCambiada);
-
+  opcionCambiada();
   const grid = document.querySelector('#grid')
   const resultDisplay = document.querySelector('#result')
   let cardsChosen = []
@@ -81,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
   saveHighscoreButton.addEventListener("click", function () { saveHighscore() });
 
   function updateHighScoresList(userName, score) {
-    if (userName != "") {//&& score != ""
+    if (userName != "") {
 
       addNewScore(userName, score);
 
@@ -155,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
       while (score >= auxScore && auxListItem.nextSibling != null) {
         auxListItem = auxListItem.nextSibling;
         auxScore = auxListItem.lastElementChild.textContent;
-        console.log(auxListItem);
       }
       if (score < auxScore) {
         highScoresList.insertBefore(newItem, auxListItem);
@@ -174,8 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //create your board
   function createBoard() {
-    //highScoresModal.show();
-    //localStorage.clear();
     loadFromLocalStorage();
 
     for (let i = 0; i < cardArray.length; i++) {
@@ -201,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const optionTwoId = cardsChosenId[1]
 
     if (optionOneId == optionTwoId) {
+      canFlipCard = true
       cards[optionOneId].setAttribute('src', 'js/images/blank.png')
       cards[optionOneId].setAttribute('alt', 'card number '+(parseInt(optionOneId)+1)+', value: blank');
       cards[optionTwoId].setAttribute('src', 'js/images/blank.png')
@@ -223,6 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
       //alert('Sorry, try again')
       resultDisplay.textContent = (resultDisplay.textContent == "" ? 0 : parseInt(resultDisplay.textContent)) - 1;
     }
+    canFlipCard = true
     cardsChosen = []
     cardsChosenId = []
     //resultDisplay.textContent = cardsWon.length
@@ -242,13 +247,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //flip your card
   function flipCard() {
+    if (!canFlipCard) return;
     let cardId = this.getAttribute('data-id')
     cardsChosen.push(cardArray[cardId].name)
     cardsChosenId.push(cardId)
     this.setAttribute('src', cardArray[cardId].img)
     this.setAttribute('alt', 'card number '+(parseInt(cardId)+1)+', value: '+cardArray[cardId].name);
     if (cardsChosen.length === 2) {
-      setTimeout(checkForMatch, tiempoEspera)
+      canFlipCard = false;
+      if (tiempoEspera == undefined)
+        checkForMatch();
+      else
+        setTimeout(checkForMatch, tiempoEspera);
     }
   }
 

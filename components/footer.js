@@ -7,10 +7,7 @@ class Footer extends HTMLElement {
   connectedCallback() {
     // Element functionality written in here
     this.innerHTML = `<footer>
-        <ul>
-        <li><a>About</a></li>
-        <li><a>Contact</a></li>
-        </ul>
+        <div class="container text-center"><p>This page was created using HTML, CSS and JavaScript</p><div>
         </footer>
         `;
     this.setAttribute("role", "contentinfo");
