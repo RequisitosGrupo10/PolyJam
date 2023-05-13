@@ -101,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadFromLocalStorage() {
         if (localStorage.getItem("minesweeperHighScores") != null) {
             actualHighScores = JSON.parse(localStorage.getItem('minesweeperHighScores'));
-            //console.log(actualHighScores);
             size = actualHighScores.length;
             for (i = 0; i < size; i++) {
                 //Creo nuevo nodo
@@ -140,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
             while (score <= auxScore && auxListItem.nextSibling != null) {
                 auxListItem = auxListItem.nextSibling;
                 auxScore = auxListItem.lastElementChild.textContent;
-                console.log(auxListItem);
             }
             if (score < auxScore) {
                 highScoresList.insertBefore(newItem, auxListItem);
@@ -162,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function myTimer() {
         if (resultDisplay.textContent == "") {
-            console.log("vacio")
             return;
         }
         resultDisplay.textContent--;
@@ -232,7 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
         image.setAttribute('src', cardArray[numberAray].img);
         image.setAttribute('name', cardArray[numberAray].name);
         let alternative = 'row ' + cellRow + ', column ' + cellCol + ', value: ' + cardArray[numberAray].name + '.';
-        console.log(alternative);
         image.setAttribute('alt', alternative);
         image.style.height = '7vw';
         image.style.width = '7vw';

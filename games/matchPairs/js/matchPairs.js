@@ -109,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function loadFromLocalStorage() {
     if (localStorage.getItem("matchPairsHighScores") != null) {
       actualHighScores = JSON.parse(localStorage.getItem('matchPairsHighScores'));
-      //console.log(actualHighScores);
       size = actualHighScores.length;
       for (i = 0; i < size; i++) {
         //Creo nuevo nodo
@@ -148,7 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
       while (score >= auxScore && auxListItem.nextSibling != null) {
         auxListItem = auxListItem.nextSibling;
         auxScore = auxListItem.lastElementChild.textContent;
-        console.log(auxListItem);
       }
       if (score < auxScore) {
         highScoresList.insertBefore(newItem, auxListItem);

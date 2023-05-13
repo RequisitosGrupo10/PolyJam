@@ -7,7 +7,7 @@ class CommentSection extends HTMLElement {
     this.innerHTML = `
         <section id="commentSection">
         <div class="card my-2" style="background-color: #cfd8dc">
-          <h3 class="h3 text-center" style="margin-top: 15px">Comments</h3>
+          <h2 class="h3 text-center mt-2">Comments</h2>
           <div class="container my-1 py-1 text-dark" id="mainCommentContainer">
             <div class="row d-flex justify-content-center">
               <div class="col-md-11 col-lg-11 col-xl-11" id="parentDiv">
@@ -15,7 +15,7 @@ class CommentSection extends HTMLElement {
                   <div class="card w-100">
                     <div class="card-body p-4">
                       <article class="">
-                        <h4>Johny Cash</h4>
+                        <strong class="h4">Johny Cash</strong>
                         <p class="small updatedTimestamp">3 hours ago</p>
                         <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -32,7 +32,7 @@ class CommentSection extends HTMLElement {
                   <div class="card w-100">
                     <div class="card-body p-4">
                       <article class="">
-                        <h4>Mindy Campbell</h4>
+                        <strong class="h4">Mindy Campbell</strong>
                         <p class="small updatedTimestamp">5 hours ago</p>
                         <p>
                           Duis aute irure dolor in reprehenderit in voluptate
