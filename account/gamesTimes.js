@@ -17,7 +17,7 @@ else
     mostPlayedDiv.innerText = "None"
 
 for (let key in times) {
-    const li_item = document.createElement("li");
+    const li_item = document.createElement("div");
     li_item.innerText = key + ' is ' + msToTime(times[key])
     li_item.classList += "list-group-item"
     list_games.appendChild(li_item)
