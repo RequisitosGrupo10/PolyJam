@@ -15,7 +15,7 @@ class CommentSection extends HTMLElement {
                   <div class="card w-100">
                     <div class="card-body p-4">
                       <article class="">
-                        <h5>Johny Cash</h5>
+                        <h4>Johny Cash</h4>
                         <p class="small updatedTimestamp">3 hours ago</p>
                         <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -32,7 +32,7 @@ class CommentSection extends HTMLElement {
                   <div class="card w-100">
                     <div class="card-body p-4">
                       <article class="">
-                        <h5>Mindy Campbell</h5>
+                        <h4>Mindy Campbell</h4>
                         <p class="small updatedTimestamp">5 hours ago</p>
                         <p>
                           Duis aute irure dolor in reprehenderit in voluptate
