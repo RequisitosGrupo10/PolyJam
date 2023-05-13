@@ -69,7 +69,6 @@ function updateStatusBar(status){
 function activateElement(event) {
     const el = event.target;
     if (el.tagName === 'SPAN'){ // its a tag
-      console.log(el.textContent);
       doSearch(el.textContent);
   
     } else if (el.tagName === 'I'){ // its a favorite
