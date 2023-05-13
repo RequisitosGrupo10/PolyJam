@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const highScoresModal = new bootstrap.Modal(document.getElementById('highScoresModal'));
-    let highScoresList = document.getElementById('highscoresList');
+    let highScoreDiv = document.getElementById('highScoresDiv');
     const saveHighscoreButton = document.getElementById('saveHighscore');
     saveHighscoreButton.addEventListener("click", function () { saveHighscore() });
 
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addNewScore(userName, score);
 
             //Local storage update
-            auxListItem = highScoresList.firstElementChild;
+            auxListItem = highScoresList.firstElementChild.firstElementChild;
             let actualHighScores = [];
             while (auxListItem != null) {
                 nombre = auxListItem.firstElementChild.textContent;
@@ -114,6 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function addNewScore(name, score) {
+
+        let highScoresList = highScoreDiv.firstElementChild;
+
+        if (highScoresList == null){
+            let newList = document.createElement("ol");
+            highScoreDiv.appendChild(newList);
+            highScoresList = highScoreDiv.firstElementChild;
+        }
 
         score = parseInt(score);
 
@@ -231,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
         image.setAttribute('alt', alternative);
         image.style.height = '7vw';
         image.style.width = '7vw';
-
     }
 
     function addMines() {
