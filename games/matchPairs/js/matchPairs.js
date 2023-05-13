@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
   saveHighscoreButton.addEventListener("click", function () { saveHighscore() });
 
   function updateHighScoresList(userName, score) {
-    if (userName != "") {//&& score != ""
+    if (userName != "") {
 
       addNewScore(userName, score);
 
@@ -168,8 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //create your board
   function createBoard() {
-    //highScoresModal.show();
-    //localStorage.clear();
     loadFromLocalStorage();
 
     for (let i = 0; i < cardArray.length; i++) {
