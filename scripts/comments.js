@@ -96,7 +96,8 @@ function submitButtonFuncion(e) {
         article.setAttribute("class", "");
         cardBodyDiv.appendChild(article);
 
-        let header = document.createElement("h5");
+        let header = document.createElement("strong");
+        header.setAttribute("class", "h4");
         header.innerHTML = displayedName;
         article.appendChild(header);
 

@@ -6,7 +6,7 @@ function load() {
     for (let i = 0; i < games.length; i++) {
         const game = games[i];
         const gameName = game.querySelector('.card-body h3.card-title').textContent;
-        const gameStar = game.querySelector('.card-body i');
+        const gameStar = game.querySelector('.card-body span');
         const gameTuple = {key: gameName, element: gameStar};
         const favouriteValue = localStorage.getItem(gameName);
 
@@ -16,6 +16,7 @@ function load() {
         }
         
         gameStar.addEventListener("click", () => clicked(gameTuple));
+        gameStar.addEventListener("keypress", (e) => {if (e.key === "Enter") clicked(gameTuple)});
     }
 }
 

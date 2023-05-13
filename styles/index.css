@@ -41,7 +41,13 @@
     font-size: 2rem;
 }
 
-i{
+span.bi-star{
+    font-size: 2em;
+    float: right;
+    color: gold;
+}
+
+span.bi-star-fill{
     font-size: 2em;
     float: right;
     color: gold;

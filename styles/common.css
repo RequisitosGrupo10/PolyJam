@@ -74,7 +74,6 @@ footer ul {
     border-radius: 4px;
     margin: 5px;
     font-size: 12px;
-    text-transform: uppercase;
     cursor: pointer;
   }
 
@@ -92,4 +91,12 @@ footer ul {
 
 .lh-0{
     line-height: 0;
+}
+
+.text-gray-dark {
+    color: #333;
+}
+
+.bg-gray-dark {
+    background-color: #333 !important; 
 }
