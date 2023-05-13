@@ -56,21 +56,22 @@ document.addEventListener('DOMContentLoaded', () => {
   cardArray.sort(() => 0.5 - Math.random())
 
   const difficulty = document.getElementById("difficulty")
-  let tiempoEspera = 3000;
+  let tiempoEspera = 5000;
   opcionCambiada = () => {
     let index = difficulty.selectedIndex;
-    if(index == 0){
-      tiempoEspera = 5000;
-    }
-    if(index == 1){
-      tiempoEspera = 1000;
-    }
-    if(index == 2){
-      tiempoEspera = 500;
+    switch (index) {
+      case 0:
+        tiempoEspera = 5000;
+      case 1:
+        tiempoEspera = 1000;
+      case 2:
+        tiempoEspera = 500;
+      default:
+        break;
     }
   };
   difficulty.addEventListener("change", opcionCambiada);
-
+  opcionCambiada();
   const grid = document.querySelector('#grid')
   const resultDisplay = document.querySelector('#result')
   let cardsChosen = []
@@ -195,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const optionTwoId = cardsChosenId[1]
 
     if (optionOneId == optionTwoId) {
+      canFlipCard = true
       cards[optionOneId].setAttribute('src', 'js/images/blank.png')
       cards[optionOneId].setAttribute('alt', 'card number '+(parseInt(optionOneId)+1)+', value: blank');
       cards[optionTwoId].setAttribute('src', 'js/images/blank.png')
@@ -245,7 +247,10 @@ document.addEventListener('DOMContentLoaded', () => {
     this.setAttribute('alt', 'card number '+(parseInt(cardId)+1)+', value: '+cardArray[cardId].name);
     if (cardsChosen.length === 2) {
       canFlipCard = false;
-      setTimeout(checkForMatch, tiempoEspera)
+      if (tiempoEspera == undefined)
+        checkForMatch();
+      else
+        setTimeout(checkForMatch, tiempoEspera);
     }
   }
 
