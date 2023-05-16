@@ -6,15 +6,20 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Can type a comment', async ({ page }) => {
+    const exampleName = "Pepe";
+    const exampleDescription = "Descripcion de ejemplo"
+
     await page.getByRole('button', { name: 'Add Comment' }).click();
     await page.locator('#displayedName').click();
-    await page.locator('#displayedName').fill('Pepe');
+    await page.locator('#displayedName').fill(exampleName);
     await page.locator('#commentText').click();
-    await page.locator('#commentText').fill('Pepe');
+    await page.locator('#commentText').fill(exampleDescription);
     await page.getByRole('button', { name: 'Submit' }).click();
-    const comment = await page.getByText('Pepe8 de mayo de 2023, 14:21PepeEditDelete');
-    if (comment == undefined)
-        throw new Error("Comment was not added");
+    const commentNode = await page.$("#parentDiv");
+    const lastChild = await commentNode.$$eval(":scope > :last-child", nodes => nodes[0].textContent);
+
+    expect(lastChild.includes(exampleName));
+    expect(lastChild.includes(exampleDescription));
 });
 
 test('Cannot type a comment if empty fields', async ({ page }) => {
@@ -30,11 +35,14 @@ test('Cannot type a comment if empty fields', async ({ page }) => {
 
 
 test('Can delete last comment added', async ({ page }) => {
+    const exampleName = "Pepe";
+    const exampleDescription = "Descripcion de ejemplo"
+
     await page.getByRole('button', { name: 'Add Comment' }).click();
     await page.locator('#displayedName').click();
-    await page.locator('#displayedName').fill('Pepe');
+    await page.locator('#displayedName').fill(exampleName);
     await page.locator('#displayedName').press('Tab');
-    await page.locator('#commentText').fill('Pepe');
+    await page.locator('#commentText').fill(exampleDescription);
     await page.getByRole('button', { name: 'Submit' }).click();
     await page.getByRole('button', { name: 'Delete' }).click();
 })
