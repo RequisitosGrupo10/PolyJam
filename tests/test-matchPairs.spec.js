@@ -229,7 +229,7 @@ test('When completing the game, the score contains the result', async ({ page })
         }
     }
     //Game finished
-    let score = await page.getByRole('heading', { name: 'Score:' })
+    let score = await page.getByText('Score:' );
     let congrats = "Congratulations! You found them all!";
 
     expect(await score.textContent()).toContain(congrats);
@@ -366,7 +366,7 @@ test('When completing the game, writing the name and clicking savehighscore, the
     await page.getByLabel('Insert your name:').fill("TestWithPlayWright");
     await page.getByRole('button', { name: 'Save highscore' }).click();
     expect(highScoreModal).not.toBeFocused;
-    expect ((await page.locator('#highscoresList').allInnerTexts()).at(0)).toContain('TestWithPlayWright');
+    expect ((await page.locator('ol').allInnerTexts()).at(0)).toContain('TestWithPlayWright');
 });
 
 

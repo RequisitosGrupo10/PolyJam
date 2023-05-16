@@ -49,7 +49,7 @@ test('All images on index has alternative text', async ({ page }) => {
 
 // to have title feature
 test('Has title', async ({ page }) => {
-  await expect(page).toHaveTitle("PolyJam");
+  await expect(page).toHaveTitle("Home | PolyJam");
 });
 
 // to have length feature
