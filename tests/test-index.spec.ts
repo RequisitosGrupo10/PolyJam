@@ -153,7 +153,7 @@ test('Click on tag shows only games that contais that tag', async ({ page }) => 
 
 test.describe('Favourite', () => {
   test('Adding a game to favourites', async ({ page }) => {
-    const biStarIconList = await page.$$('i.bi-star');
+    const biStarIconList = await page.$$('span.bi-star');
     const games = await page.$$('h3.card-title');
     var cnt = 0;
     for (const biStarIcon of biStarIconList) {
@@ -187,12 +187,12 @@ test.describe('Favourite', () => {
   });
 
   test('Removing a game from favourites', async ({ page }) => {
-    const biStarIconList = await page.$$('i.bi-star');
+    const biStarIconList = await page.$$('span.bi-star');
     //Toggling all icons from bi-star to bi-star-fill
     for (const biStarIcon of biStarIconList) {
       await biStarIcon.click();
     }
-    const biStarFillIconList = await page.$$('i.bi-star-fill');
+    const biStarFillIconList = await page.$$('span.bi-star-fill');
     const games = await page.$$('h3.card-title');
     var cnt = 0;
     for (const biStarFillIcon of biStarFillIconList) {
